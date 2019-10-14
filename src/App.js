@@ -12,6 +12,7 @@ import LoginLayout from './layouts/LoginLayout';
 import Home from './Pages/Home';
 import Usuarios from './Pages/Usuarios';
 import Login from './Pages/Login';
+import produtividade from './Pages/Produtividade';
 
 const App = () => {
   return (
@@ -22,6 +23,11 @@ const App = () => {
           <Routes path="/login" layout={LoginLayout} component={Login} />
           <Routes path="/home" layout={DashLayout} component={Home} />
           <Routes path="/usuarios" layout={DashLayout} component={Usuarios} />
+          <Routes
+            path="/produtividade"
+            layout={DashLayout}
+            component={produtividade}
+          />
         </Switch>
       </Wrapper>
       <GlobalStyle />
