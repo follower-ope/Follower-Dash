@@ -6,16 +6,17 @@ import { Container } from './styles';
 
 const Sidebar = () => (
   <Container>
-    <div>
-      <nav>
+    <header>Menu</header>
+    <nav>
+      <ul>
         <li>
           <Link to="/home">Home</Link>
         </li>
         <li>
           <Link to="/usuarios">Usuarios</Link>
         </li>
-      </nav>
-    </div>
+      </ul>
+    </nav>
   </Container>
 );
 

@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
 export const Container = styled.aside`
-  flex: 1;
+  width: 200px;
+  background: #f6f6f6;
+
+  header {
+    position: relative;
+    height: 80px;
+    padding: 20px 0 0 15px;
+    font-size: 16;
+    color: #fff;
+    background: #000;
+  }
 `;

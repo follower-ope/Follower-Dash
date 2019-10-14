@@ -4,8 +4,8 @@ import { Container, Card } from './style';
 
 export default function Login({ history }) {
   useEffect(() => {
-    if (true) history.push('/Home');
-  }, []);
+    if (false) history.push('/Home');
+  }, [history]);
 
   function handleLogin(e) {
     e.preventDefault();
