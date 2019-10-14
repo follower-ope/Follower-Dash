@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Container, Card } from './style';
 
 export default function Login({ history }) {
+  useEffect(() => {
+    if (true) history.push('/Home');
+  }, []);
+
   function handleLogin(e) {
     e.preventDefault();
 
-    history.push('/dashboard');
+    history.push('/Home');
   }
 
   return (

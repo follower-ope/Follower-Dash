@@ -1,16 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Login from './Pages/Login';
-import Dashboard from './Pages/Dashboard';
+import { Route } from 'react-router-dom';
 
-export default function Routes() {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={Login} />
-        <Route path="/Dashboard" exact component={Dashboard} />
-      </Switch>
-    </BrowserRouter>
-  );
-}
+const Routes = ({ component: Component, layout: Layout, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (
+      <Layout>
+        <Component {...props} />
+      </Layout>
+    )}
+  />
+);
+
+export default Routes;

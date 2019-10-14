@@ -1,13 +1,32 @@
 import React from 'react';
+import { BrowserRouter, Switch } from 'react-router-dom';
+
+import { Wrapper } from './styles/components';
 
 import Routes from './routes';
 import GlobalStyle from './styles/global';
 
-export default function App() {
+import DashLayout from './layouts/DashLayout';
+import LoginLayout from './layouts/LoginLayout';
+
+import Home from './Pages/Home';
+import Usuarios from './Pages/Usuarios';
+import Login from './Pages/Login';
+
+const App = () => {
   return (
-    <>
-      <Routes />
+    <BrowserRouter>
+      <Wrapper>
+        <Switch>
+          <Routes exact path="/" layout={LoginLayout} component={Login} />
+          <Routes path="/login" layout={LoginLayout} component={Login} />
+          <Routes path="/home" layout={DashLayout} component={Home} />
+          <Routes path="/usuarios" layout={DashLayout} component={Usuarios} />
+        </Switch>
+      </Wrapper>
       <GlobalStyle />
-    </>
+    </BrowserRouter>
   );
-}
+};
+
+export default App;
