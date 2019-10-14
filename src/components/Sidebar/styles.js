@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.aside`
   width: 200px;
-  background: #f6f6f6;
+  background: #6f6f6f;
 
   header {
     position: relative;
