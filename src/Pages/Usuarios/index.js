@@ -28,7 +28,9 @@ const Usuarios = () => {
     <>
       <h1>Usuarios</h1>
       <form onSubmit={e => handleSubmit(e)}>
+        <label>UserName</label>
         <input type="text" onChange={e => handleUserNameChange(e)} />
+        <label>Nome</label>
         <input type="text" onChange={e => handleNameChange(e)} />
         <button>Salvar</button>
       </form>

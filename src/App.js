@@ -11,6 +11,7 @@ import LoginLayout from './layouts/LoginLayout';
 
 import Home from './Pages/Home';
 import Usuarios from './Pages/Usuarios';
+import Projetos from './Pages/Projetos';
 import Login from './Pages/Login';
 import produtividade from './Pages/Produtividade';
 
@@ -23,6 +24,7 @@ const App = () => {
           <Routes path="/login" layout={LoginLayout} component={Login} />
           <Routes path="/home" layout={DashLayout} component={Home} />
           <Routes path="/usuarios" layout={DashLayout} component={Usuarios} />
+          <Routes path="/projetos" layout={DashLayout} component={Projetos} />
           <Routes
             path="/produtividade"
             layout={DashLayout}

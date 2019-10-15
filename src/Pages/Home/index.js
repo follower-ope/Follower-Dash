@@ -1,13 +1,5 @@
 import React from 'react';
 
-import { Content } from './style';
-
-const Home = () => {
-  return (
-    <Content>
-      <p>Content</p>
-    </Content>
-  );
-};
+const Home = () => <h1>home</h1>;
 
 export default Home;
