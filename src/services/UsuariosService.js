@@ -12,7 +12,8 @@ export const SaveUsuario = async (username, name, role = 1) => {
       name,
       role,
     });
-    console.log(response);
+
+    return response;
   } catch (e) {
     alert('err');
   }

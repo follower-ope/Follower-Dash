@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -10,16 +10,36 @@ const Sidebar = () => (
     <nav>
       <ul>
         <li>
-          <Link to="/home">Home</Link>
+          <NavLink activeClassName="active" to="/home">
+            <p>Home</p>
+          </NavLink>
         </li>
         <li>
-          <Link to="/usuarios">Usuarios</Link>
+          <NavLink activeClassName="active" to="/usuarios">
+            <p>Usuarios</p>
+          </NavLink>
         </li>
         <li>
-          <Link to="/projetos">Projetos</Link>
+          <NavLink activeClassName="active" to="/projetos">
+            <p>Projetos</p>
+          </NavLink>
         </li>
         <li>
-          <Link to="/produtividade">Produtividade</Link>
+          <NavLink activeClassName="active" to="/dashboards">
+            <p>Dashboards</p>
+          </NavLink>
+          <br />
+          <NavLink activeClassName="active" to="/dashboards">
+            Usuarios Entrada Saida
+          </NavLink>
+          <br />
+          <NavLink activeClassName="active" to="/dashboards">
+            Projetos
+          </NavLink>
+          <br />
+          <NavLink activeClassName="active" to="/dashboards">
+            Usuarios
+          </NavLink>
         </li>
       </ul>
     </nav>

@@ -16,7 +16,8 @@ import Home from './Pages/Home';
 import Usuarios from './Pages/Usuarios';
 import Projetos from './Pages/Projetos';
 import Login from './Pages/Login';
-import produtividade from './Pages/Produtividade';
+import Dasboards from './Pages/Dashboards';
+import NotFound from './components/NotFound';
 
 import store from './store';
 
@@ -32,10 +33,11 @@ const App = () => {
             <Routes path="/usuarios" layout={DashLayout} component={Usuarios} />
             <Routes path="/projetos" layout={DashLayout} component={Projetos} />
             <Routes
-              path="/produtividade"
+              path="/Dashboards"
               layout={DashLayout}
-              component={produtividade}
+              component={Dasboards}
             />
+            <Routes layout={DashLayout} component={NotFound} />
           </Switch>
         </Wrapper>
         <GlobalStyle />

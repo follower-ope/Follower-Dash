@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useSelector, connect } from 'react-redux';
+
+import { bindActionCreators } from 'redux';
+import { Creators as LoginActions } from '../../store/ducks/login';
 
 import { Container, Card } from './style';
 
-export default function Login({ history }) {
-  useEffect(() => {
-    if (false) history.push('/Home');
-  }, [history]);
-
+const Login = ({ login: { loading }, loginRequest }) => {
+  const wtf = useSelector(state => state.data);
   function handleLogin(e) {
     e.preventDefault();
-
-    history.push('/Home');
+    loginRequest('teste');
+    // history.push('/Home');
   }
 
   return (
@@ -23,4 +24,16 @@ export default function Login({ history }) {
       </Card>
     </Container>
   );
-}
+};
+
+const mapStateToProps = state => ({
+  login: state.login,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(LoginActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
