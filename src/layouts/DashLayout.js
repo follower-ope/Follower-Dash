@@ -1,14 +1,18 @@
 import React from 'react';
 
-import { Content, Main } from '../styles/components';
+import { Content, Main, Container } from '../styles/components';
 
 import Sidebar from '../components/Sidebar';
+import NavMenu from '../components/NavMenu';
 
 const DashLayout = ({ children }) => (
   <>
     <Content>
       <Sidebar />
-      <Main>{children}</Main>
+      <Main>
+        <NavMenu />
+        <Container>{children}</Container>
+      </Main>
     </Content>
   </>
 );

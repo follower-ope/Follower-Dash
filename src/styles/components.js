@@ -13,6 +13,9 @@ export const Content = styled.div`
 
 export const Main = styled.div`
   flex: 1;
+`;
+
+export const Container = styled.div`
   padding: 25px;
   background: #ffff;
 `;
