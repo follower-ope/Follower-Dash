@@ -1,4 +1,6 @@
 import React from 'react';
+import { FaHome, FaUser, FaProjectDiagram } from 'react-icons/fa';
+import { MdTimeline, MdExtension } from 'react-icons/md';
 
 import { NavLink } from 'react-router-dom';
 
@@ -11,22 +13,42 @@ const Sidebar = () => (
       <ul>
         <li>
           <NavLink activeClassName="active" to="/home">
-            <p>Home</p>
+            <p>
+              <FaHome />
+              Home
+            </p>
           </NavLink>
         </li>
         <li>
           <NavLink activeClassName="active" to="/usuarios">
-            <p>Usuarios</p>
+            <p>
+              <FaUser />
+              Usuarios
+            </p>
           </NavLink>
         </li>
         <li>
           <NavLink activeClassName="active" to="/projetos">
-            <p>Projetos</p>
+            <p>
+              <FaProjectDiagram />
+              Projetos
+            </p>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="active" to="/softwares">
+            <p>
+              <MdExtension />
+              Softwares
+            </p>
           </NavLink>
         </li>
         <li>
           <NavLink activeClassName="active" to="/dashboards">
-            <p>Dashboards</p>
+            <p>
+              <MdTimeline />
+              Dashboards
+            </p>
           </NavLink>
           <br />
           <NavLink activeClassName="active" to="/dashboards">

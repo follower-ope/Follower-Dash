@@ -18,6 +18,7 @@ import Projetos from './Pages/Projetos';
 import Login from './Pages/Login';
 import Dasboards from './Pages/Dashboards';
 import DetalhesProjeto from './Pages/DetalhesProjeto';
+import Softwares from './Pages/Softwares';
 import NotFound from './components/NotFound';
 
 import store from './store';
@@ -38,7 +39,11 @@ const App = () => {
               component={DetalhesProjeto}
             />
             <Routes path="/projetos" layout={DashLayout} component={Projetos} />
-
+            <Routes
+              path="/softwares"
+              layout={DashLayout}
+              component={Softwares}
+            />
             <Routes
               path="/Dashboards"
               layout={DashLayout}
