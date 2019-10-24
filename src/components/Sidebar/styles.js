@@ -30,6 +30,11 @@ export const Container = styled.aside`
 
     p {
       padding: 20px;
+      font-size: 18px;
+
+      svg {
+        margin-right: 10px;
+      }
     }
 
     .active p {
