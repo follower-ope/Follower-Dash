@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { GetProjetos, CreateProject } from '../../services/ProjetosService';
 
 const Projetos = () => {
@@ -63,6 +64,7 @@ const Projetos = () => {
           <tr>
             <th>Nome</th>
             <th>Horas</th>
+            <th>teste</th>
           </tr>
         </thead>
         <tbody>
@@ -70,6 +72,9 @@ const Projetos = () => {
             <tr>
               <td>{project.name}</td>
               <td>{project.time}</td>
+              <td>
+                <Link to={`/projetos/${project.id}`}>link</Link>
+              </td>
             </tr>
           ))}
         </tbody>

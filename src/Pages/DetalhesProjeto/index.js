@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
-import { Container, ChartContent } from './style';
+import { Container, ChartContent, Content, UsersContent } from './style';
 
 const DetalhesProjeto = props => {
   const [pieData, setPieData] = useState({});
@@ -76,7 +76,7 @@ const DetalhesProjeto = props => {
   }, []);
 
   const handleInputKeyPressed = e => {
-    if (e.which === 13) {
+    if (e.target.value !== '' && e.which === 13) {
       setUsuarios([...usuarios, e.target.value]);
       e.target.value = '';
     }
@@ -86,8 +86,8 @@ const DetalhesProjeto = props => {
     <>
       <h1>Projeto 1</h1>
 
-      <div>
-        <div>
+      <Content>
+        <UsersContent>
           <h5>usuarios do projeto</h5>
           <input type="text" onKeyPress={e => handleInputKeyPressed(e)} />
           <div>
@@ -97,7 +97,7 @@ const DetalhesProjeto = props => {
               ))}
             </ul>
           </div>
-        </div>
+        </UsersContent>
 
         <Container>
           <ChartContent>
@@ -121,7 +121,7 @@ const DetalhesProjeto = props => {
             )}
           </ChartContent>
         </Container>
-      </div>
+      </Content>
     </>
   );
 };
