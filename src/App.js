@@ -17,6 +17,7 @@ import Usuarios from './Pages/Usuarios';
 import Projetos from './Pages/Projetos';
 import Login from './Pages/Login';
 import Dasboards from './Pages/Dashboards';
+import DetalhesProjeto from './Pages/DetalhesProjeto';
 import NotFound from './components/NotFound';
 
 import store from './store';
@@ -31,7 +32,13 @@ const App = () => {
             <Routes path="/login" layout={LoginLayout} component={Login} />
             <Routes path="/home" layout={DashLayout} component={Home} />
             <Routes path="/usuarios" layout={DashLayout} component={Usuarios} />
+            <Routes
+              path="/projetos/:id"
+              layout={DashLayout}
+              component={DetalhesProjeto}
+            />
             <Routes path="/projetos" layout={DashLayout} component={Projetos} />
+
             <Routes
               path="/Dashboards"
               layout={DashLayout}

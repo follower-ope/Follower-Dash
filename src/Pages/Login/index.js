@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import { Creators as LoginActions } from '../../store/ducks/login';
@@ -7,7 +7,6 @@ import { Creators as LoginActions } from '../../store/ducks/login';
 import { Container, Card } from './style';
 
 const Login = ({ login: { loading }, loginRequest }) => {
-  const wtf = useSelector(state => state.data);
   function handleLogin(e) {
     e.preventDefault();
     loginRequest('teste');
