@@ -5,7 +5,8 @@ import { GetProjetos, CreateProject } from '../../services/ProjetosService';
 const Projetos = () => {
   const [projects, setProjects] = useState([]);
   const [newProject, setNewProject] = useState(false);
-  const [nameProject, setNameProject] = useState('');
+  const [titleProject, setTitleProject] = useState('');
+  const [descProject, setDescProject] = useState('');
   const [timeProject, setTimeProject] = useState('');
 
   const fetchProjetos = async () => {
@@ -16,16 +17,17 @@ const Projetos = () => {
     fetchProjetos();
   }, []);
 
-  const handleNameProjectChange = e => setNameProject(e.target.value);
+  const handleTitleProjectChange = e => setTitleProject(e.target.value);
   const handleTimeProjectChange = e => setTimeProject(e.target.value);
+  const handleDescProjectChange = e => setDescProject(e.target.value);
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    await CreateProject(nameProject, timeProject);
+    await CreateProject(titleProject, descProject, timeProject);
     await fetchProjetos();
 
-    setNameProject('');
+    setTitleProject('');
     setTimeProject('');
 
     setNewProject(false);
@@ -45,8 +47,14 @@ const Projetos = () => {
             <label>Nome</label>
             <input
               type="text"
-              value={nameProject}
-              onChange={e => handleNameProjectChange(e)}
+              value={titleProject}
+              onChange={e => handleTitleProjectChange(e)}
+            />
+            <label>Descricao</label>
+            <input
+              type="text"
+              value={descProject}
+              onChange={e => handleDescProjectChange(e)}
             />
             <label>Time</label>
             <input
@@ -63,17 +71,19 @@ const Projetos = () => {
         <thead>
           <tr>
             <th>Nome</th>
+            <th>Descricao</th>
             <th>Horas</th>
-            <th>teste</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           {projects.map(project => (
             <tr>
-              <td>{project.name}</td>
+              <td>{project.title}</td>
+              <td>{project.description}</td>
               <td>{project.time}</td>
               <td>
-                <Link to={`/projetos/${project.id}`}>link</Link>
+                <Link to={`/projetos/${project.id}`}>ver mais</Link>
               </td>
             </tr>
           ))}

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { GetSoftwares } from '../../services/SoftwaresService';
 
 const Softwares = () => {
   const [softwares, setSoftwares] = useState([]);
 
+  const fetchSoftwares = async () => {
+    setSoftwares(await GetSoftwares());
+  };
+
   useEffect(() => {
-    setSoftwares([
-      { name: 'software 1', isProdutive: true },
-      { name: 'software 2', isProdutive: false },
-    ]);
+    fetchSoftwares();
   }, []);
 
   return (
@@ -17,7 +19,7 @@ const Softwares = () => {
         <thead>
           <tr>
             <th>Nome</th>
-            <th>Nome de usuario</th>
+            <th>Produtivo</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +39,7 @@ const Softwares = () => {
         <thead>
           <tr>
             <th>Nome</th>
-            <th>Nome de usuario</th>
+            <th>Produtivo</th>
           </tr>
         </thead>
         <tbody>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import Select from 'react-dropdown-select';
 
 import { Container, ChartContent, Content, UsersContent } from './style';
 
@@ -7,6 +8,8 @@ const DetalhesProjeto = props => {
   const [pieData, setPieData] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
   const [usuarios, setUsuarios] = useState([]);
+
+  const users = [{ label: 'User1', value: 1 }, { label: 'User2', value: 2 }];
 
   useEffect(() => {
     const { id } = props.match.params;
@@ -82,6 +85,12 @@ const DetalhesProjeto = props => {
     }
   };
 
+  const addUser = user => {
+    user.map(u => {
+      setUsuarios([...usuarios, u.label]);
+    });
+  };
+
   return (
     <>
       <h1>Projeto 1</h1>
@@ -89,6 +98,7 @@ const DetalhesProjeto = props => {
       <Content>
         <UsersContent>
           <h5>usuarios do projeto</h5>
+          <Select options={users} onChange={values => addUser(values)} />
           <input type="text" onKeyPress={e => handleInputKeyPressed(e)} />
           <div>
             <ul>

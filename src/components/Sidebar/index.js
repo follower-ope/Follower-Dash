@@ -43,7 +43,7 @@ const Sidebar = () => (
             </p>
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink activeClassName="active" to="/dashboards">
             <p>
               <MdTimeline />
@@ -62,7 +62,7 @@ const Sidebar = () => (
           <NavLink activeClassName="active" to="/dashboards">
             Usuarios
           </NavLink>
-        </li>
+        </li> */}
       </ul>
     </nav>
   </Container>

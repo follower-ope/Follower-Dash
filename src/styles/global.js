@@ -26,4 +26,19 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  table {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    margin: 10px 0;
+    border-radius: 4px;
+    box-shadow: 1px 3px 5px -1px black;
+
+    td {
+      padding:10px;
+      border-bottom: 1px solid black;
+    }
+  }
+
 `;

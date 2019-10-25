@@ -9,6 +9,7 @@ export function* login(data) {
     const { payload } = data;
 
     window.localStorage.setItem('token', '123');
+    window.localStorage.setItem('name', 'Admin');
     yield put(LoginActions.loginSuccess(null));
     window.location = '/home';
 
