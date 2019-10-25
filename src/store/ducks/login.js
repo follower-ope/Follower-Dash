@@ -23,5 +23,8 @@ export const Creators = {
     type: Types.GET_REQUEST_LOGIN,
     payload: { data },
   }),
-  loginSuccess: () => ({ type: Types.GET_SUCCESS_LOGIN }),
+  loginSuccess: () => {
+    console.log('teste');
+    return { type: Types.GET_SUCCESS_LOGIN };
+  },
 };

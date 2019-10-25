@@ -23,9 +23,13 @@ import NotFound from './components/NotFound';
 
 import store from './store';
 
+import 'react-notifications-component/dist/theme.css';
+import ReactNotification from 'react-notifications-component';
+
 const App = () => {
   return (
     <Provider store={store}>
+      <ReactNotification />
       <BrowserRouter>
         <Wrapper>
           <Switch>
