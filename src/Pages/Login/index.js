@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { FaSpinner } from 'react-icons/fa';
 import { bindActionCreators } from 'redux';
 import { Creators as LoginActions } from '../../store/ducks/login';
 
 import { Container, Card } from './style';
 
 const Login = ({ login: { loading }, loginRequest }) => {
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
-    loginRequest('teste');
+
+    await loginRequest({ email: 'vitor@gmail.com', password: '123' });
+
     // history.push('/Home');
   }
 
@@ -19,7 +21,9 @@ const Login = ({ login: { loading }, loginRequest }) => {
         <h1>Login</h1>
         <input type="text" placeholder="Email" />
         <input type="password" placeholder="Senha" />
-        <button onClick={e => handleLogin(e)}>Entrar</button>
+        <button onClick={e => handleLogin(e)} disabled={loading}>
+          {loading ? <FaSpinner /> : 'Entrar'}
+        </button>
       </Card>
     </Container>
   );
