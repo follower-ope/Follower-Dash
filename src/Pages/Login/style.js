@@ -24,45 +24,50 @@ export const Card = styled.div`
     font-size: 50px;
   }
 
-  input {
-    flex: 1;
-    margin: 20px 10px;
-    padding: 10px 20px;
-    border-radius: 4px;
-    border: 2px solid #4938d4cc;
-  }
+  form {
+    display: flex;
+    flex-direction: column;
 
-  button {
-    border: 0;
-    border-radius: 4px;
-    background-color: #4938d4cc;
-    padding: 20px 10px;
-    color: #fff;
-    font-size: 20px;
-
-    svg {
-      -webkit-animation: rotating 2s linear infinite;
-      -moz-animation: rotating 2s linear infinite;
-      -ms-animation: rotating 2s linear infinite;
-      -o-animation: rotating 2s linear infinite;
-      animation: rotating 2s linear infinite;
+    input {
+      flex: 1;
+      margin: 20px 10px;
+      padding: 10px 20px;
+      border-radius: 4px;
+      border: 2px solid #4938d4cc;
     }
-  }
 
-  @keyframes rotating {
-    from {
-      -ms-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -webkit-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+    button {
+      border: 0;
+      border-radius: 4px;
+      background-color: #4938d4cc;
+      padding: 20px 10px;
+      color: #fff;
+      font-size: 20px;
+
+      svg {
+        -webkit-animation: rotating 2s linear infinite;
+        -moz-animation: rotating 2s linear infinite;
+        -ms-animation: rotating 2s linear infinite;
+        -o-animation: rotating 2s linear infinite;
+        animation: rotating 2s linear infinite;
+      }
     }
-    to {
-      -ms-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -webkit-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+
+    @keyframes rotating {
+      from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
     }
   }
 `;

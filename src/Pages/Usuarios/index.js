@@ -92,7 +92,7 @@ const Usuarios = () => {
                 <td>{user.name}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
-                <td>{projects.filter(p => p.id == user.project_id).title}</td>
+                <td>{projects.filter(p => p.id === user.project_id).title}</td>
               </tr>
             ))}
           </tbody>

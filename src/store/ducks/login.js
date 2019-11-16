@@ -24,7 +24,6 @@ export const Creators = {
     payload: { data },
   }),
   loginSuccess: () => {
-    console.log('teste');
     return { type: Types.GET_SUCCESS_LOGIN };
   },
 };
