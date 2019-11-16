@@ -1,9 +1,18 @@
 import api from './api';
+import { errorMessage } from './Messages';
 
 export const GetUsuarios = async () => {
-  const { data } = await api.get('/users');
-  console.log(data);
-  return data;
+  try {
+    const response = await api.get('/users', {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    errorMessage('Ocorreu um erro ao carregar usuarios');
+    return [];
+  }
 };
 
 export const SaveUsuario = async (username, name, email, role = 1) => {
@@ -12,13 +21,10 @@ export const SaveUsuario = async (username, name, email, role = 1) => {
       username,
       name,
       email,
-      password_hash: 'default',
-      profile_id: 1,
-      project_id: 1,
     });
-    console.log(response);
+
     return response;
   } catch (e) {
-    alert('err');
+    errorMessage('Ocorreu um erro ao salvar usuario');
   }
 };

@@ -80,8 +80,8 @@ const Usuarios = () => {
         <table>
           <thead>
             <tr>
-              <th>Nome</th>
               <th>Nome de usuario</th>
+              <th>Nome</th>
               <th>Email</th>
               <th>Projeto</th>
             </tr>
@@ -89,8 +89,8 @@ const Usuarios = () => {
           <tbody>
             {users.map(user => (
               <tr>
-                <td>{user.name}</td>
                 <td>{user.username}</td>
+                <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{projects.filter(p => p.id === user.project_id).title}</td>
               </tr>

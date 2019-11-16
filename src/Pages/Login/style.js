@@ -15,6 +15,7 @@ export const Card = styled.div`
   margin: 0 auto;
   padding: 40px 20px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   border-radius: 4px;
   box-shadow: 2px 2px 15px #383434;
@@ -69,5 +70,11 @@ export const Card = styled.div`
         transform: rotate(360deg);
       }
     }
+  }
+
+  @media (max-width: 500px) {
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
   }
 `;

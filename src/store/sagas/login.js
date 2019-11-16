@@ -19,7 +19,11 @@ export function* login(data) {
       window.location = '/home';
     }
   } catch (err) {
-    errorMessage(err.response.data.error);
+    if (!err.response) {
+      errorMessage('Ocorreu um erro, tente novamente mais tarde');
+    } else {
+      errorMessage(err.response.data.error);
+    }
 
     yield put(LoginActions.loginSuccess(null));
   }
