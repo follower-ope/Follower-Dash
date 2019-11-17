@@ -24,13 +24,20 @@ const Projetos = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    await CreateProject(titleProject, descProject, timeProject);
-    await fetchProjetos();
+    const nProject = await CreateProject(
+      titleProject,
+      descProject,
+      timeProject
+    );
 
-    setTitleProject('');
-    setTimeProject('');
+    if (nProject) {
+      setProjects([...projects, nProject]);
 
-    setNewProject(false);
+      setTitleProject('');
+      setTimeProject('');
+
+      setNewProject(false);
+    }
   };
 
   const handleNewProject = () => {
@@ -73,7 +80,7 @@ const Projetos = () => {
             <th>Nome</th>
             <th>Descricao</th>
             <th>Horas</th>
-            <th></th>
+            <th />
           </tr>
         </thead>
         <tbody>

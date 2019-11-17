@@ -23,7 +23,7 @@ export const SaveUsuario = async (username, name, email) => {
       email,
     });
 
-    return response;
+    return response.data;
   } catch ({ response }) {
     errorMessage(response.data.error);
     return null;

@@ -33,11 +33,14 @@ const Usuarios = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (await SaveUsuario(username, name, email)) {
-      await fetchUsers();
+    const nUser = await SaveUsuario(username, name, email);
+
+    if (nUser) {
+      setUsers([...users, nUser]);
 
       setName('');
       setUsername('');
+      setEmail('');
 
       setNewUser(false);
     }

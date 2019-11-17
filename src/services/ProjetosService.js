@@ -17,14 +17,23 @@ export const GetProjetos = async () => {
 
 export const CreateProject = async (title, description, time) => {
   try {
-    const response = await api.post('/projects', {
-      title,
-      description,
-      time,
-    });
+    const response = await api.post(
+      '/projects',
+      {
+        title,
+        description,
+        time,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
 
-    console.log(response);
-  } catch (e) {
-    alert('err');
+    return response.data;
+  } catch ({ response }) {
+    errorMessage(response.data.error);
+    return null;
   }
 };
