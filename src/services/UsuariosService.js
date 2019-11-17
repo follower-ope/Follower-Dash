@@ -15,7 +15,7 @@ export const GetUsuarios = async () => {
   }
 };
 
-export const SaveUsuario = async (username, name, email, role = 1) => {
+export const SaveUsuario = async (username, name, email) => {
   try {
     const response = await api.post('/users', {
       username,
@@ -24,7 +24,8 @@ export const SaveUsuario = async (username, name, email, role = 1) => {
     });
 
     return response;
-  } catch (e) {
-    errorMessage('Ocorreu um erro ao salvar usuario');
+  } catch ({ response }) {
+    errorMessage(response.data.error);
+    return null;
   }
 };
