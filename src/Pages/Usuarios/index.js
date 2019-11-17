@@ -33,13 +33,14 @@ const Usuarios = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    await SaveUsuario(username, name, email);
-    await fetchUsers();
+    if (await SaveUsuario(username, name, email)) {
+      await fetchUsers();
 
-    setName('');
-    setUsername('');
+      setName('');
+      setUsername('');
 
-    setNewUser(false);
+      setNewUser(false);
+    }
   };
 
   const handleNewUser = () => {
@@ -88,11 +89,15 @@ const Usuarios = () => {
           </thead>
           <tbody>
             {users.map(user => (
-              <tr>
+              <tr key={user.username}>
                 <td>{user.username}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{projects.filter(p => p.id === user.project_id).title}</td>
+                <td>
+                  {projects.find(p => p.id === user.project_id)
+                    ? projects.find(p => p.id === user.project_id).title
+                    : ''}
+                </td>
               </tr>
             ))}
           </tbody>

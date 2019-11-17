@@ -1,9 +1,18 @@
 import api from './api';
+import { errorMessage } from './Messages';
 
 export const GetProjetos = async () => {
-  const { data } = await api.get('/projects');
-  console.log(data);
-  return data;
+  try {
+    const response = await api.get('/projects', {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    errorMessage('Ocorreu um erro ao carregar usuarios');
+    return [];
+  }
 };
 
 export const CreateProject = async (title, description, time) => {
