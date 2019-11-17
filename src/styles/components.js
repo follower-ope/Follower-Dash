@@ -17,5 +17,4 @@ export const Main = styled.div`
 
 export const Container = styled.div`
   padding: 25px;
-  background: #ffff;
 `;

@@ -5,7 +5,6 @@ export const Container = styled.aside`
   background: #5d4afbcc;
 
   header {
-    box-shadow: -6px 1px 5px #000;
     position: relative;
     height: 80px;
     font-size: 32px;

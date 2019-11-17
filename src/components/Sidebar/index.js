@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaHome, FaUser, FaProjectDiagram } from 'react-icons/fa';
-import { MdTimeline, MdExtension } from 'react-icons/md';
+import { MdExtension } from 'react-icons/md';
 
 import { NavLink } from 'react-router-dom';
 

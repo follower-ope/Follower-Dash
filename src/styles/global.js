@@ -11,6 +11,7 @@ export default createGlobalStyle`
   html, body, #root {
     height: 100%;
     min-height: 100%;
+    background: #f3f3f3;
   }
 
   body {
@@ -29,15 +30,36 @@ export default createGlobalStyle`
 
   table {
     width: 100%;
-    padding: 20px;
-    text-align: center;
     margin: 10px 0;
-    border-radius: 4px;
-    box-shadow: 1px 3px 5px -1px black;
+    border-collapse: separate;
+    border-spacing: 0 15px;
 
-    td {
-      padding:10px;
-      border-bottom: 1px solid black;
+    thead {
+      text-align: left;
+
+      th {
+        opacity: 0.8;
+      }
+    }
+
+    tbody {
+      tr {
+        background: #fff;
+        border-radius: 10px;
+
+        td:first-child { border-top-left-radius: 10px; }
+        td:first-child { border-bottom-left-radius: 10px; }
+        td:last-child { border-top-right-radius: 10px; }
+        td:last-child{ border-bottom-right-radius: 10px; }
+
+        td {
+          padding: 10px 0;
+          padding-left: 15px;
+          background: transparent;
+        }
+      }
+
+
     }
   }
 
