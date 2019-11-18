@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import { GetUsuarios, SaveUsuario } from '../../services/UsuariosService';
+import {
+  GetUsers,
+  GetUsersIncomplete,
+  SaveUser,
+} from '../../services/UsuariosService';
 import { GetProjetos } from '../../services/ProjetosService';
 
 import { Container } from './styles';
@@ -10,11 +14,13 @@ const Usuarios = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [users, setUsers] = useState([]);
+  const [usersIncomplete, setUsersIncomplete] = useState([]);
   const [newUser, setNewUser] = useState(false);
   const [projects, setProjects] = useState([]);
 
   const fetchUsers = async () => {
-    setUsers(await GetUsuarios());
+    setUsers(await GetUsers());
+    setUsersIncomplete(await GetUsersIncomplete());
   };
 
   const fetchProjects = async () => {
@@ -33,7 +39,7 @@ const Usuarios = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const nUser = await SaveUsuario(username, name, email);
+    const nUser = await SaveUser(username, name, email);
 
     if (nUser) {
       setUsers([...users, nUser]);
@@ -92,6 +98,32 @@ const Usuarios = () => {
           </thead>
           <tbody>
             {users.map(user => (
+              <tr key={user.username}>
+                <td>{user.username}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                  {projects.find(p => p.id === user.project_id)
+                    ? projects.find(p => p.id === user.project_id).title
+                    : ''}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <p>Usuarios com cadastro incompleto</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome de usuario</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Projeto</th>
+            </tr>
+          </thead>
+          <tbody>
+            {usersIncomplete.map(user => (
               <tr key={user.username}>
                 <td>{user.username}</td>
                 <td>{user.name}</td>

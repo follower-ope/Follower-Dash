@@ -15,6 +15,20 @@ export const GetProjetos = async () => {
   }
 };
 
+export const GetProjectDetails = async projectId => {
+  try {
+    const response = await api.get(`/projects/${projectId}`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    errorMessage('Ocorreu um erro ao carregar usuarios');
+    return [];
+  }
+};
+
 export const CreateProject = async (title, description, time) => {
   try {
     const response = await api.post(

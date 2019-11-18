@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import Select from 'react-dropdown-select';
-
+import { GetUsers } from '../../services/UsuariosService';
+import { GetProjectDetails } from '../../services/ProjetosService';
 import { Container, ChartContent, Content, UsersContent } from './style';
 
 const DetalhesProjeto = props => {
+  const [project, setProject] = useState({});
   const [pieData, setPieData] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
   const [usuarios, setUsuarios] = useState([]);
 
   const users = [{ label: 'User1', value: 1 }, { label: 'User2', value: 2 }];
 
-  useEffect(() => {
-    const { id } = props.match.params;
+  const fetchUsers = async () => {
+    setUsuarios(await GetUsers());
+  };
 
+  const fetchProjectDetails = async () => {
+    const { id } = props.match.params;
+    setProject(await GetProjectDetails(id));
+  };
+
+  useEffect(() => {
     setPieData({
       options: {
         labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
@@ -75,35 +84,44 @@ const DetalhesProjeto = props => {
       ],
     });
 
-    setUsuarios(['usuario 1', 'usuario 2', 'usuario 3']);
+    fetchUsers();
+    fetchProjectDetails();
   }, []);
 
   const handleInputKeyPressed = e => {
     if (e.target.value !== '' && e.which === 13) {
-      setUsuarios([...usuarios, e.target.value]);
+      setUsuarios([
+        ...usuarios,
+        { name: e.target.value, username: e.target.value },
+      ]);
       e.target.value = '';
     }
   };
 
   const addUser = user => {
     user.map(u => {
-      setUsuarios([...usuarios, u.label]);
+      setUsuarios([...usuarios, u]);
     });
   };
 
   return (
     <>
-      <h1>Projeto 1</h1>
+      <h1>{project.title}</h1>
 
       <Content>
         <UsersContent>
           <h5>usuarios do projeto</h5>
-          <Select options={users} onChange={values => addUser(values)} />
+          <Select
+            options={usuarios.map(u => {
+              return { label: u.username, value: u.username };
+            })}
+            onChange={values => addUser(values)}
+          />
           <input type="text" onKeyPress={e => handleInputKeyPressed(e)} />
           <div>
             <ul>
               {usuarios.map(user => (
-                <li>{user}</li>
+                <li key={user.username}>{user.username}</li>
               ))}
             </ul>
           </div>
@@ -111,24 +129,30 @@ const DetalhesProjeto = props => {
 
         <Container>
           <ChartContent>
-            {pieData.options && (
-              <Chart
-                options={pieData.options}
-                series={pieData.series}
-                type="pie"
-                width="380"
-              />
-            )}
+            <h1>Titulo</h1>
+            <div>
+              {pieData.options && (
+                <Chart
+                  options={pieData.options}
+                  series={pieData.series}
+                  type="pie"
+                  width="380"
+                />
+              )}
+            </div>
           </ChartContent>
           <ChartContent>
-            {areaChartData.options && (
-              <Chart
-                options={areaChartData.options}
-                series={areaChartData.series}
-                type="area"
-                width="500"
-              />
-            )}
+            <h1>Titulo</h1>
+            <div>
+              {areaChartData.options && (
+                <Chart
+                  options={areaChartData.options}
+                  series={areaChartData.series}
+                  type="area"
+                  width="500"
+                />
+              )}
+            </div>
           </ChartContent>
         </Container>
       </Content>
