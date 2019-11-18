@@ -27,40 +27,4 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
-
-  table {
-    width: 100%;
-    margin: 10px 0;
-    border-collapse: separate;
-    border-spacing: 0 15px;
-
-    thead {
-      text-align: left;
-
-      th {
-        opacity: 0.8;
-      }
-    }
-
-    tbody {
-      tr {
-        background: #fff;
-        border-radius: 10px;
-
-        td:first-child { border-top-left-radius: 10px; }
-        td:first-child { border-bottom-left-radius: 10px; }
-        td:last-child { border-top-right-radius: 10px; }
-        td:last-child{ border-bottom-right-radius: 10px; }
-
-        td {
-          padding: 10px 0;
-          padding-left: 15px;
-          background: transparent;
-        }
-      }
-
-
-    }
-  }
-
 `;

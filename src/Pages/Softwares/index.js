@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Table } from '../../styles/components';
 import { GetSoftwares } from '../../services/SoftwaresService';
 
 const Softwares = () => {
@@ -12,10 +13,16 @@ const Softwares = () => {
     fetchSoftwares();
   }, []);
 
+  const changeProductivity = (e, processName) => {
+    const s = softwares[0];
+    s.productive = e.target.checked;
+    setSoftwares([s]);
+  };
+
   return (
     <>
       <h1>Softwares</h1>
-      <table>
+      <Table>
         <thead>
           <tr>
             <th>Nome</th>
@@ -24,35 +31,19 @@ const Softwares = () => {
         </thead>
         <tbody>
           {softwares.map(software => (
-            <tr>
+            <tr key={software.process_name}>
               <td>{software.name}</td>
               <td>
-                <input type="checkbox" />
+                <input
+                  onChange={e => changeProductivity(e, software.process_name)}
+                  type="checkbox"
+                  checked={software.productive}
+                />
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
-      <br />
-      <h5>Softwares ainda não classificado</h5>
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Produtivo</th>
-          </tr>
-        </thead>
-        <tbody>
-          {softwares.map(software => (
-            <tr>
-              <td>{software.name}</td>
-              <td>
-                <input type="checkbox" />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      </Table>
     </>
   );
 };

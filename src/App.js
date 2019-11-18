@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactNotification from 'react-notifications-component';
 import { BrowserRouter, Switch } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
@@ -24,7 +25,6 @@ import NotFound from './components/NotFound';
 import store from './store';
 
 import 'react-notifications-component/dist/theme.css';
-import ReactNotification from 'react-notifications-component';
 
 const App = () => {
   return (

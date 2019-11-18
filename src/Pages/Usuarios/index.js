@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { GetUsuarios, SaveUsuario } from '../../services/UsuariosService';
 import { GetProjetos } from '../../services/ProjetosService';
 
-import { Container } from './styles';
+import { Table, Button } from '../../styles/components';
+import { Form, Title } from './styles';
 
 const Usuarios = () => {
   const [username, setUsername] = useState('');
@@ -47,65 +48,73 @@ const Usuarios = () => {
   };
 
   const handleNewUser = () => {
-    setNewUser(true);
+    setNewUser(!newUser);
   };
 
   return (
     <>
-      <h1>Usuarios</h1>
-      <Container>
-        <div>
-          <button onClick={() => handleNewUser()}>Novo Usuario</button>
-          {newUser && (
-            <form onSubmit={e => handleSubmit(e)}>
-              <label>Nome de Usuario</label>
+      <Title>
+        <h1>Usuarios</h1>
+        <Button type="button" onClick={() => handleNewUser()}>
+          Novo Usuario
+        </Button>
+      </Title>
+      <div>
+        {newUser && (
+          <Form onSubmit={e => handleSubmit(e)}>
+            <label htmlFor="username">
+              Nome de Usuario
               <input
                 type="text"
                 value={username}
                 onChange={e => handleUsernameChange(e)}
               />
-              <label>Nome</label>
+            </label>
+            <label htmlFor="nome">
+              Nome
               <input
                 type="text"
                 value={name}
                 onChange={e => handleNameChange(e)}
               />
-              <label>Email</label>
+            </label>
+            <label htmlFor="email">
+              Email
               <input
                 type="text"
                 value={email}
                 onChange={e => handleEmailChange(e)}
               />
-              <button>Salvar</button>
-            </form>
-          )}
-        </div>
+            </label>
+            <button type="button">Salvar</button>
+          </Form>
+        )}
+      </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Nome de usuario</th>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Projeto</th>
+      <Table>
+        <thead>
+          <tr>
+            <th>Nome de usuario</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Projeto</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <tr key={user.username}>
+              <td>{user.username}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>
+                {projects.find(p => p.id === user.project_id)
+                  ? projects.find(p => p.id === user.project_id).title
+                  : ''}
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {users.map(user => (
-              <tr key={user.username}>
-                <td>{user.username}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>
-                  {projects.find(p => p.id === user.project_id)
-                    ? projects.find(p => p.id === user.project_id).title
-                    : ''}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Container>
+          ))}
+        </tbody>
+      </Table>
     </>
   );
 };

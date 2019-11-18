@@ -1,7 +1,16 @@
 import api from './api';
+import { errorMessage } from './Messages';
 
 export const GetSoftwares = async () => {
-  const { data } = await api.get('/softwares');
-  console.log(data);
-  return data;
+  try {
+    const response = await api.get('/softwares', {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    errorMessage('Ocorreu um erro ao carregar usuarios');
+    return [];
+  }
 };

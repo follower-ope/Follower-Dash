@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Title } from './styles';
+import { Table, Button } from '../../styles/components';
 import { GetProjetos, CreateProject } from '../../services/ProjetosService';
 
 const Projetos = () => {
@@ -41,40 +43,51 @@ const Projetos = () => {
   };
 
   const handleNewProject = () => {
-    setNewProject(true);
+    setNewProject(!newProject);
   };
 
   return (
     <div>
-      <h1>Projetos</h1>
+      <Title>
+        <h1>Projetos</h1>
+        <Button type="button" onClick={() => handleNewProject()}>
+          Novo Projeto
+        </Button>
+      </Title>
+
       <div>
-        <button onClick={() => handleNewProject()}>Novo Projeto</button>
         {newProject && (
           <form onSubmit={e => handleSubmit(e)}>
-            <label>Nome</label>
-            <input
-              type="text"
-              value={titleProject}
-              onChange={e => handleTitleProjectChange(e)}
-            />
-            <label>Descricao</label>
-            <input
-              type="text"
-              value={descProject}
-              onChange={e => handleDescProjectChange(e)}
-            />
-            <label>Time</label>
-            <input
-              type="text"
-              value={timeProject}
-              onChange={e => handleTimeProjectChange(e)}
-            />
-            <button>Salvar</button>
+            <label htmlFor="nome">
+              Nome
+              <input
+                type="text"
+                value={titleProject}
+                onChange={e => handleTitleProjectChange(e)}
+              />
+            </label>
+            <label htmlFor="descricao">
+              Descricao
+              <input
+                type="text"
+                value={descProject}
+                onChange={e => handleDescProjectChange(e)}
+              />
+            </label>
+            <label htmlFor="timeproject">
+              Time
+              <input
+                type="text"
+                value={timeProject}
+                onChange={e => handleTimeProjectChange(e)}
+              />
+            </label>
+            <button type="button">Salvar</button>
           </form>
         )}
       </div>
 
-      <table>
+      <Table>
         <thead>
           <tr>
             <th>Nome</th>
@@ -95,7 +108,7 @@ const Projetos = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };

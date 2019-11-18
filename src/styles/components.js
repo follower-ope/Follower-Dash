@@ -18,3 +18,52 @@ export const Main = styled.div`
 export const Container = styled.div`
   padding: 25px;
 `;
+
+export const Table = styled.table`
+  width: 100%;
+  margin: 10px 0;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+
+  thead {
+    text-align: left;
+
+    th {
+      opacity: 0.8;
+    }
+  }
+
+  tbody {
+    tr {
+      background: #fff;
+      border-radius: 10px;
+
+      td:first-child {
+        border-top-left-radius: 10px;
+      }
+      td:first-child {
+        border-bottom-left-radius: 10px;
+      }
+      td:last-child {
+        border-top-right-radius: 10px;
+      }
+      td:last-child {
+        border-bottom-right-radius: 10px;
+      }
+
+      td {
+        padding: 10px 0;
+        padding-left: 15px;
+        background: transparent;
+      }
+    }
+  }
+`;
+
+export const Button = styled.button`
+  border: 0;
+  border-radius: 3px;
+  background: #5d4afbcc;
+  color: #fff;
+  padding: 10px;
+`;

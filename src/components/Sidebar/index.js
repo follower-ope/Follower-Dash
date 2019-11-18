@@ -8,14 +8,16 @@ import { Container } from './styles';
 
 const Sidebar = () => (
   <Container>
-    <header>Menu</header>
+    <header>
+      <span>Menu</span>
+    </header>
     <nav>
       <ul>
         <li>
           <NavLink activeClassName="active" to="/home">
             <p>
               <FaHome />
-              Home
+              <span>Home</span>
             </p>
           </NavLink>
         </li>
@@ -23,7 +25,7 @@ const Sidebar = () => (
           <NavLink activeClassName="active" to="/usuarios">
             <p>
               <FaUser />
-              Usuarios
+              <span>Usuarios</span>
             </p>
           </NavLink>
         </li>
@@ -31,7 +33,7 @@ const Sidebar = () => (
           <NavLink activeClassName="active" to="/projetos">
             <p>
               <FaProjectDiagram />
-              Projetos
+              <span>Projetos</span>
             </p>
           </NavLink>
         </li>
@@ -39,30 +41,10 @@ const Sidebar = () => (
           <NavLink activeClassName="active" to="/softwares">
             <p>
               <MdExtension />
-              Softwares
+              <span>Softwares</span>
             </p>
           </NavLink>
         </li>
-        {/* <li>
-          <NavLink activeClassName="active" to="/dashboards">
-            <p>
-              <MdTimeline />
-              Dashboards
-            </p>
-          </NavLink>
-          <br />
-          <NavLink activeClassName="active" to="/dashboards">
-            Usuarios Entrada Saida
-          </NavLink>
-          <br />
-          <NavLink activeClassName="active" to="/dashboards">
-            Projetos
-          </NavLink>
-          <br />
-          <NavLink activeClassName="active" to="/dashboards">
-            Usuarios
-          </NavLink>
-        </li> */}
       </ul>
     </nav>
   </Container>

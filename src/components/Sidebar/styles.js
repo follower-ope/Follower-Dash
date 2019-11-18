@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.aside`
-  width: 200px;
+  width: 150px;
+  min-width: 150px;
   background: #5d4afbcc;
+  transition: width 0.5s;
 
   header {
     position: relative;
@@ -38,6 +40,19 @@ export const Container = styled.aside`
 
     .active p {
       background: #110098cc;
+    }
+  }
+
+  @media (max-width: 700px) {
+    width: 60px;
+    min-width: 60px;
+
+    span {
+      display: none;
+    }
+
+    header {
+      height: 20px;
     }
   }
 `;
