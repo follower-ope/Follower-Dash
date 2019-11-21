@@ -59,7 +59,7 @@ const Login = ({ login: { loading }, loginRequest }) => {
               setPasswordInput(input);
             }}
           />
-          <button type="button" disabled={loading}>
+          <button type="submit" disabled={loading}>
             {loading ? <FaSpinner /> : 'Entrar'}
           </button>
         </form>

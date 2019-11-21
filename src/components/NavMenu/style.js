@@ -15,4 +15,8 @@ export const Content = styled.div`
     border: 0;
     padding: 10px;
   }
+
+  @media (max-width: 700px) {
+    height: 40px;
+  }
 `;

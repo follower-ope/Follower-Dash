@@ -82,7 +82,7 @@ const Projetos = () => {
                 onChange={e => handleTimeProjectChange(e)}
               />
             </label>
-            <button type="button">Salvar</button>
+            <button type="submit">Salvar</button>
           </form>
         )}
       </div>

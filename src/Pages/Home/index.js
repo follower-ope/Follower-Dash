@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
+import { Content } from './style';
+import { ChartContent } from '../../styles/components';
+
 const Home = () => {
   const [data, setData] = useState({});
 
@@ -26,17 +29,33 @@ const Home = () => {
   return (
     <>
       <h1>Home</h1>
-      <div>
+      <Content>
         {data.options && (
-          <Chart
-            options={data.options}
-            series={data.series}
-            type="bar"
-            width={500}
-            height={320}
-          />
+          <ChartContent>
+            <h1>Chart</h1>
+            <Chart
+              options={data.options}
+              series={data.series}
+              type="bar"
+              width={500}
+              height={320}
+            />
+          </ChartContent>
         )}
-      </div>
+
+        {data.options && (
+          <ChartContent>
+            <h1>Chart</h1>
+            <Chart
+              options={data.options}
+              series={data.series}
+              type="bar"
+              width={200}
+              height={320}
+            />
+          </ChartContent>
+        )}
+      </Content>
     </>
   );
 };

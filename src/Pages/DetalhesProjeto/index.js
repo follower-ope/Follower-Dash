@@ -3,15 +3,14 @@ import Chart from 'react-apexcharts';
 import Select from 'react-dropdown-select';
 import { GetUsers } from '../../services/UsuariosService';
 import { GetProjectDetails } from '../../services/ProjetosService';
-import { Container, ChartContent, Content, UsersContent } from './style';
+import { Container, Content, UsersContent } from './style';
+import { ChartContent } from '../../styles/components';
 
 const DetalhesProjeto = props => {
   const [project, setProject] = useState({});
   const [pieData, setPieData] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
   const [usuarios, setUsuarios] = useState([]);
-
-  const users = [{ label: 'User1', value: 1 }, { label: 'User2', value: 2 }];
 
   const fetchUsers = async () => {
     setUsuarios(await GetUsers());

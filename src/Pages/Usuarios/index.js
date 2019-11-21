@@ -113,9 +113,11 @@ const Usuarios = () => {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                {projects.find(p => p.id === user.project_id)
-                  ? projects.find(p => p.id === user.project_id).title
-                  : ''}
+                {projects.find(p => p.id === user.project_id) ? (
+                  projects.find(p => p.id === user.project_id).title
+                ) : (
+                  <p className="faded">Nenhum</p>
+                )}
               </td>
             </tr>
           ))}
@@ -139,9 +141,11 @@ const Usuarios = () => {
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>
-                {projects.find(p => p.id === user.project_id)
-                  ? projects.find(p => p.id === user.project_id).title
-                  : ''}
+                {projects.find(p => p.id === user.project_id) ? (
+                  projects.find(p => p.id === user.project_id).title
+                ) : (
+                  <p className="faded">Nenhum</p>
+                )}
               </td>
             </tr>
           ))}
