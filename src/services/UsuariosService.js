@@ -29,12 +29,12 @@ export const GetUsersIncomplete = async () => {
   }
 };
 
-export const SaveUser = async (username, name, email) => {
+export const SaveUser = async user => {
   try {
     const response = await api.post('/users', {
-      username,
-      name,
-      email,
+      username: user.username,
+      name: user.name,
+      email: user.email,
     });
 
     return response.data;

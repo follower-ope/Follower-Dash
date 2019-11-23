@@ -11,12 +11,10 @@ import { Table, Button } from '../../styles/components';
 import { Form, Title } from './styles';
 
 const Usuarios = () => {
-  const [username, setUsername] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [newUser, setNewUser] = useState({ username: '', name: '', email: '' });
   const [users, setUsers] = useState([]);
   const [usersIncomplete, setUsersIncomplete] = useState([]);
-  const [newUser, setNewUser] = useState(false);
+  const [creatingUser, setCreatingUser] = useState(false);
   const [projects, setProjects] = useState([]);
 
   const fetchUsers = async () => {
@@ -33,28 +31,24 @@ const Usuarios = () => {
     fetchProjects();
   }, []);
 
-  const handleUsernameChange = e => setUsername(e.target.value);
-  const handleNameChange = e => setName(e.target.value);
-  const handleEmailChange = e => setEmail(e.target.value);
+  const handleNewUserChange = obj => {
+    setNewUser({ ...newUser, ...obj });
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const nUser = await SaveUser(username, name, email);
+    const nUser = await SaveUser(newUser);
 
     if (nUser) {
       setUsers([...users, nUser]);
-
-      setName('');
-      setUsername('');
-      setEmail('');
-
-      setNewUser(false);
+      setNewUser({ username: '', name: '', email: '' });
+      setCreatingUser(false);
     }
   };
 
   const handleNewUser = () => {
-    setNewUser(!newUser);
+    setCreatingUser(!creatingUser);
   };
 
   return (
@@ -66,33 +60,35 @@ const Usuarios = () => {
         </Button>
       </Title>
       <div>
-        {newUser && (
+        {creatingUser && (
           <Form onSubmit={e => handleSubmit(e)}>
             <label htmlFor="username">
               Nome de Usuario
               <input
                 type="text"
-                value={username}
-                onChange={e => handleUsernameChange(e)}
+                value={newUser.username}
+                onChange={e =>
+                  handleNewUserChange({ username: e.target.value })
+                }
               />
             </label>
             <label htmlFor="nome">
               Nome
               <input
                 type="text"
-                value={name}
-                onChange={e => handleNameChange(e)}
+                value={newUser.name}
+                onChange={e => handleNewUserChange({ name: e.target.value })}
               />
             </label>
             <label htmlFor="email">
               Email
               <input
                 type="text"
-                value={email}
-                onChange={e => handleEmailChange(e)}
+                value={newUser.email}
+                onChange={e => handleNewUserChange({ email: e.target.value })}
               />
             </label>
-            <button type="button">Salvar</button>
+            <button type="submit">Salvar</button>
           </Form>
         )}
       </div>
