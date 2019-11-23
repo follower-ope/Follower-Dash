@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Title } from './styles';
 import { Table, Button } from '../../styles/components';
-import { GetProjetos, CreateProject } from '../../services/ProjetosService';
+import { GetProjects, CreateProject } from '../../services/ProjectService';
 
-const Projetos = () => {
+const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [newProject, setNewProject] = useState(false);
   const [titleProject, setTitleProject] = useState('');
   const [descProject, setDescProject] = useState('');
   const [timeProject, setTimeProject] = useState('');
 
-  const fetchProjetos = async () => {
-    setProjects(await GetProjetos());
+  const fetchProjects = async () => {
+    setProjects(await GetProjects());
   };
 
   useEffect(() => {
-    fetchProjetos();
+    fetchProjects();
   }, []);
 
   const handleTitleProjectChange = e => setTitleProject(e.target.value);
@@ -113,4 +113,4 @@ const Projetos = () => {
   );
 };
 
-export default Projetos;
+export default Projects;

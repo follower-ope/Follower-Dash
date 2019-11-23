@@ -4,13 +4,13 @@ import {
   GetUsers,
   GetUsersIncomplete,
   SaveUser,
-} from '../../services/UsuariosService';
-import { GetProjetos } from '../../services/ProjetosService';
+} from '../../services/UserService';
+import { GetProjects } from '../../services/ProjectService';
 
 import { Table, Button } from '../../styles/components';
 import { Form, Title } from './styles';
 
-const Usuarios = () => {
+const Users = () => {
   const [newUser, setNewUser] = useState({ username: '', name: '', email: '' });
   const [users, setUsers] = useState([]);
   const [usersIncomplete, setUsersIncomplete] = useState([]);
@@ -23,7 +23,7 @@ const Usuarios = () => {
   };
 
   const fetchProjects = async () => {
-    setProjects(await GetProjetos());
+    setProjects(await GetProjects());
   };
 
   useEffect(() => {
@@ -151,4 +151,4 @@ const Usuarios = () => {
   );
 };
 
-export default Usuarios;
+export default Users;

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import Select from 'react-dropdown-select';
-import { GetUsers } from '../../services/UsuariosService';
-import { GetProjectDetails } from '../../services/ProjetosService';
+import { GetUsers } from '../../services/UserService';
+import { GetProjectDetails } from '../../services/ProjectService';
 import { Container, Content, UsersContent } from './style';
 import { ChartContent } from '../../styles/components';
 
-const DetalhesProjeto = props => {
+const ProjectDetails = props => {
   const [project, setProject] = useState({});
   const [pieData, setPieData] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
@@ -159,4 +159,4 @@ const DetalhesProjeto = props => {
   );
 };
 
-export default DetalhesProjeto;
+export default ProjectDetails;

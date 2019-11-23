@@ -1,7 +1,7 @@
 import api from './api';
 import { errorMessage } from './Messages';
 
-export const GetProjetos = async () => {
+export const GetProjects = async () => {
   try {
     const response = await api.get('/projects', {
       headers: {

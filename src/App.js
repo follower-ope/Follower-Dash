@@ -14,11 +14,11 @@ import DashLayout from './layouts/DashLayout';
 import LoginLayout from './layouts/LoginLayout';
 
 import Home from './Pages/Home';
-import Usuarios from './Pages/Usuarios';
-import Projetos from './Pages/Projetos';
+import Users from './Pages/Users';
+import Projects from './Pages/Projects';
 import Login from './Pages/Login';
 import Dasboards from './Pages/Dashboards';
-import DetalhesProjeto from './Pages/DetalhesProjeto';
+import ProjectDetails from './Pages/ProjectDetails';
 import Softwares from './Pages/Softwares';
 import NotFound from './components/NotFound';
 
@@ -36,13 +36,13 @@ const App = () => {
             <Routes exact path="/" layout={LoginLayout} component={Login} />
             <Routes path="/login" layout={LoginLayout} component={Login} />
             <Routes path="/home" layout={DashLayout} component={Home} />
-            <Routes path="/usuarios" layout={DashLayout} component={Usuarios} />
+            <Routes path="/usuarios" layout={DashLayout} component={Users} />
             <Routes
               path="/projetos/:id"
               layout={DashLayout}
-              component={DetalhesProjeto}
+              component={ProjectDetails}
             />
-            <Routes path="/projetos" layout={DashLayout} component={Projetos} />
+            <Routes path="/projetos" layout={DashLayout} component={Projects} />
             <Routes
               path="/softwares"
               layout={DashLayout}
