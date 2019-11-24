@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from 'react-router-dom';
 import {
   GetUsers,
   GetUsersIncomplete,
@@ -100,6 +100,7 @@ const Users = () => {
             <th>Nome</th>
             <th>Email</th>
             <th>Projeto</th>
+            <th />
           </tr>
         </thead>
         <tbody>
@@ -114,6 +115,9 @@ const Users = () => {
                 ) : (
                   <p className="faded">Nenhum</p>
                 )}
+              </td>
+              <td>
+                <Link to={`/usuario/${user.username}`}>ver mais</Link>
               </td>
             </tr>
           ))}

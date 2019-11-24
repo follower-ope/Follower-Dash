@@ -15,6 +15,7 @@ import LoginLayout from './layouts/LoginLayout';
 
 import Home from './Pages/Home';
 import Users from './Pages/Users';
+import UserDetails from './Pages/UserDetails';
 import Projects from './Pages/Projects';
 import Login from './Pages/Login';
 import Dasboards from './Pages/Dashboards';
@@ -36,13 +37,21 @@ const App = () => {
             <Routes exact path="/" layout={LoginLayout} component={Login} />
             <Routes path="/login" layout={LoginLayout} component={Login} />
             <Routes path="/home" layout={DashLayout} component={Home} />
+
             <Routes path="/usuarios" layout={DashLayout} component={Users} />
             <Routes
-              path="/projetos/:id"
+              path="/usuario/:username"
+              layout={DashLayout}
+              component={UserDetails}
+            />
+
+            <Routes path="/projetos" layout={DashLayout} component={Projects} />
+            <Routes
+              path="/projeto/:id"
               layout={DashLayout}
               component={ProjectDetails}
             />
-            <Routes path="/projetos" layout={DashLayout} component={Projects} />
+
             <Routes
               path="/softwares"
               layout={DashLayout}

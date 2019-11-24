@@ -1,5 +1,5 @@
 import api from './api';
-import { errorMessage } from './Messages';
+import { errorMessage, successMessage } from './Messages';
 
 export const GetUsers = async () => {
   try {
@@ -9,6 +9,20 @@ export const GetUsers = async () => {
       },
     });
     return response.data;
+  } catch (err) {
+    errorMessage('Ocorreu um erro ao carregar usuarios');
+    return [];
+  }
+};
+
+export const GetUser = async username => {
+  try {
+    const response = await api.get(`/users/${username}`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+    return response.data[0];
   } catch (err) {
     errorMessage('Ocorreu um erro ao carregar usuarios');
     return [];
@@ -39,7 +53,28 @@ export const SaveUser = async user => {
 
     return response.data;
   } catch ({ response }) {
-    errorMessage(response.data.error);
+    errorMessage(response ? response.data.error : 'Ocorreu um erro');
     return null;
+  }
+};
+
+export const ChangeUserProject = async (username, projectId) => {
+  try {
+    await api.put(
+      `/users/${username}`,
+      {
+        project_id: projectId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
+    successMessage('Adicionado usuario no projeto com sucesso');
+    return true;
+  } catch ({ response }) {
+    errorMessage(response ? response.data.error : 'Ocorreu um erro');
+    return false;
   }
 };
