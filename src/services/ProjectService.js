@@ -17,12 +17,24 @@ export const GetProjects = async () => {
 
 export const GetProjectDetails = async projectId => {
   try {
-    const response = await api.get(`/projects/${projectId}`, {
+    const responseProject = await api.get(`/projects/${projectId}`, {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     });
-    return response.data;
+
+    const responseUsersProject = await api.get(`/projectUsers/${projectId}`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+
+    const project = {
+      ...responseProject.data,
+      users: responseUsersProject.data,
+    };
+
+    return project;
   } catch (err) {
     errorMessage('Ocorreu um erro ao carregar usuarios');
     return [];
@@ -47,7 +59,7 @@ export const CreateProject = async (title, description, time) => {
 
     return response.data;
   } catch ({ response }) {
-    errorMessage(response.data.error);
+    errorMessage(response ? response.data.error : 'Ocorreu um erro');
     return null;
   }
 };

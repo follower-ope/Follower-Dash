@@ -103,7 +103,7 @@ const Projects = () => {
               <td>{project.description}</td>
               <td>{project.time}</td>
               <td>
-                <Link to={`/projetos/${project.id}`}>ver mais</Link>
+                <Link to={`/projeto/${project.id}`}>ver mais</Link>
               </td>
             </tr>
           ))}

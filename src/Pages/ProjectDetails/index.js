@@ -1,25 +1,43 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Chart from 'react-apexcharts';
 import Select from 'react-dropdown-select';
-import { GetUsers } from '../../services/UserService';
+import { GetUsers, ChangeUserProject } from '../../services/UserService';
 import { GetProjectDetails } from '../../services/ProjectService';
 import { Container, Content, UsersContent } from './style';
 import { ChartContent } from '../../styles/components';
+import { successMessage } from '../../services/Messages';
 
 const ProjectDetails = props => {
   const [project, setProject] = useState({});
   const [pieData, setPieData] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
-  const [usuarios, setUsuarios] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const fetchUsers = async () => {
-    setUsuarios(await GetUsers());
+    const user = await GetUsers();
+
+    if (project.users) {
+      setUsers(
+        user.filter(value => {
+          const userInProject = project.users.find(element => {
+            return element.username === value.username;
+          });
+
+          return !userInProject;
+        })
+      );
+    }
   };
 
   const fetchProjectDetails = async () => {
     const { id } = props.match.params;
     setProject(await GetProjectDetails(id));
   };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [project]);
 
   useEffect(() => {
     setPieData({
@@ -83,45 +101,47 @@ const ProjectDetails = props => {
       ],
     });
 
-    fetchUsers();
     fetchProjectDetails();
   }, []);
 
-  const handleInputKeyPressed = e => {
-    if (e.target.value !== '' && e.which === 13) {
-      setUsuarios([
-        ...usuarios,
-        { name: e.target.value, username: e.target.value },
-      ]);
-      e.target.value = '';
-    }
-  };
-
   const addUser = user => {
     user.map(u => {
-      setUsuarios([...usuarios, u]);
+      const saveProjectState = project;
+      setProject({
+        ...project,
+        users: [...project.users, { username: u.value, name: u.value }],
+      });
+
+      const success = ChangeUserProject(u.value, project.id);
+      if (!success) {
+        setProject(saveProjectState);
+      }
     });
   };
 
   return (
     <>
       <h1>{project.title}</h1>
-
+      <p>{project.description}</p>
+      <br />
+      <br />
+      <br />
       <Content>
         <UsersContent>
           <h5>usuarios do projeto</h5>
           <Select
-            options={usuarios.map(u => {
+            options={users.map(u => {
               return { label: u.username, value: u.username };
             })}
             onChange={values => addUser(values)}
+            placeholder="Selecione..."
           />
-          <input type="text" onKeyPress={e => handleInputKeyPressed(e)} />
           <div>
             <ul>
-              {usuarios.map(user => (
-                <li key={user.username}>{user.username}</li>
-              ))}
+              {project.users &&
+                project.users.map(user => (
+                  <li key={user.username}>{user.username}</li>
+                ))}
             </ul>
           </div>
         </UsersContent>
@@ -160,3 +180,7 @@ const ProjectDetails = props => {
 };
 
 export default ProjectDetails;
+
+ProjectDetails.propTypes = {
+  match: PropTypes.element.isRequired,
+};
