@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FaSpinner } from 'react-icons/fa';
 import { bindActionCreators } from 'redux';
@@ -75,7 +76,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(LoginActions, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+Login.propTypes = {
+  login: PropTypes.element.isRequired,
+  loginRequest: PropTypes.element.isRequired,
+};

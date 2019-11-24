@@ -18,12 +18,12 @@ export function* login(data) {
       yield put(LoginActions.loginSuccess(true));
       window.location = '/home';
     }
-  } catch (err) {
-    if (!err.response) {
-      errorMessage('Ocorreu um erro, tente novamente mais tarde');
-    } else {
-      errorMessage(err.response.data.error);
-    }
+  } catch ({ response }) {
+    errorMessage(
+      response
+        ? response.data.error
+        : 'Ocorreu um erro, tente novamente mais tarde'
+    );
 
     yield put(LoginActions.loginSuccess(null));
   }
