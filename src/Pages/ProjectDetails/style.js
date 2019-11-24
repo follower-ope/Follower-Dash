@@ -3,6 +3,13 @@ import styled from 'styled-components';
 export const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
+
+  li {
+    button {
+      padding: 3px 7px;
+      margin-left: 5px;
+    }
+  }
 `;
 
 export const UsersContent = styled.div`

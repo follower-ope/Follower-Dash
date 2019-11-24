@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { GetUser } from '../../services/UserService';
 
-const UserDetails = props => {
+const UserDetails = ({ match }) => {
   const [user, setUser] = useState({});
 
-  const fetchUser = async () => {
-    const { username } = props.match.params;
-    setUser(await GetUser(username));
-  };
-
   useEffect(() => {
+    const fetchUser = async () => {
+      const { username } = match.params;
+      setUser(await GetUser(username));
+    };
     fetchUser();
   }, []);
 
@@ -60,8 +59,8 @@ const UserDetails = props => {
   );
 };
 
-export default UserDetails;
-
 UserDetails.propTypes = {
   match: PropTypes.element.isRequired,
 };
+
+export default UserDetails;

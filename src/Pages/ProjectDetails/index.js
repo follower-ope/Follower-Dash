@@ -5,8 +5,7 @@ import Select from 'react-dropdown-select';
 import { GetUsers, ChangeUserProject } from '../../services/UserService';
 import { GetProjectDetails } from '../../services/ProjectService';
 import { Container, Content, UsersContent } from './style';
-import { ChartContent } from '../../styles/components';
-import { successMessage } from '../../services/Messages';
+import { ChartContent, Button } from '../../styles/components';
 
 const ProjectDetails = props => {
   const [project, setProject] = useState({});
@@ -106,16 +105,21 @@ const ProjectDetails = props => {
 
   const addUser = user => {
     user.map(u => {
-      const saveProjectState = project;
       setProject({
         ...project,
         users: [...project.users, { username: u.value, name: u.value }],
       });
 
-      const success = ChangeUserProject(u.value, project.id);
-      if (!success) {
-        setProject(saveProjectState);
-      }
+      ChangeUserProject(u.value, project.id);
+    });
+  };
+
+  const handleRemoveUser = username => {
+    ChangeUserProject(username, null);
+
+    setProject({
+      ...project,
+      users: project.users.filter(element => element.username !== username),
     });
   };
 
@@ -140,7 +144,15 @@ const ProjectDetails = props => {
             <ul>
               {project.users &&
                 project.users.map(user => (
-                  <li key={user.username}>{user.username}</li>
+                  <li key={user.username}>
+                    {user.username}
+                    <Button
+                      type="button"
+                      onClick={() => handleRemoveUser(user.username)}
+                    >
+                      x
+                    </Button>
+                  </li>
                 ))}
             </ul>
           </div>

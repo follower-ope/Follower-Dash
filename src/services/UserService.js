@@ -71,7 +71,12 @@ export const ChangeUserProject = async (username, projectId) => {
         },
       }
     );
-    successMessage('Adicionado usuario no projeto com sucesso');
+
+    const message = `${
+      projectId ? 'Adicionado usuario no' : 'Removido usuario do'
+    }  projeto com sucesso`;
+
+    successMessage(message);
     return true;
   } catch ({ response }) {
     errorMessage(response ? response.data.error : 'Ocorreu um erro');
