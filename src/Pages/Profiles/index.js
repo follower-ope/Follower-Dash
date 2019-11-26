@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { GetProfiles } from '../../services/ProfileService';
 import { Table, Button } from '../../styles/components';
 import { Title } from './styles';
+import CreateProfile from '../../components/CreateProfile';
 
-function Profiles {
+function Profiles() {
   const [profiles, setProfiles] = useState([]);
   const [creatingProfile, setCreatingProfile] = useState(false);
 
@@ -15,18 +16,26 @@ function Profiles {
     fetchProfiles();
   }, []);
 
-  const handleNewProfile = () => {
-    return setCreatingProfile(true);
+  const updateProfile = profile => {
+    setProfiles([...profiles, profile]);
   };
 
   return (
     <>
       <Title>
         <h1>Perfils</h1>
-        <Button type="button" onClick={() => handleNewProfile()}>
+        <Button
+          type="button"
+          onClick={() => setCreatingProfile(!creatingProfile)}
+        >
           Novo Perfil
         </Button>
       </Title>
+
+      <div>
+        {creatingProfile && <CreateProfile updateProfile={updateProfile} />}
+      </div>
+
       <Table>
         <thead>
           <tr>
@@ -47,6 +56,6 @@ function Profiles {
       </Table>
     </>
   );
-};
+}
 
 export default Profiles;
