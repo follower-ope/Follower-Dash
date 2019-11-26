@@ -4,7 +4,7 @@ import { GetUser, UpdateUser } from '../../services/UserService';
 import { GetProjects } from '../../services/ProjectService';
 import { GetProfiles } from '../../services/ProfileService';
 
-const UserDetails = ({ match }) => {
+function UserDetails({ match }) {
   const [user, setUser] = useState({});
   const [projects, setProjects] = useState([]);
   const [profiles, setProfiles] = useState([]);
@@ -101,7 +101,7 @@ const UserDetails = ({ match }) => {
       </form>
     </>
   );
-};
+}
 
 UserDetails.propTypes = {
   match: PropTypes.element.isRequired,

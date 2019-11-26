@@ -4,7 +4,7 @@ import { GetProfiles } from '../../services/ProfileService';
 import { Table, Button } from '../../styles/components';
 import { Title } from './styles';
 
-const Profiles = () => {
+function Profiles {
   const [profiles, setProfiles] = useState([]);
   const [creatingProfile, setCreatingProfile] = useState(false);
 

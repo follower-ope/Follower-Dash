@@ -8,7 +8,7 @@ import { Creators as LoginActions } from '../../store/ducks/login';
 
 import { Container, Card } from './style';
 
-const Login = ({ login: { loading }, loginRequest }) => {
+function Login({ login: { loading }, loginRequest }) {
   const [emailInput, setEmailInput] = useState(null);
   const [passwordInput, setPasswordInput] = useState(null);
   const [email, setEmail] = useState({ value: '', isValid: false });
@@ -67,7 +67,7 @@ const Login = ({ login: { loading }, loginRequest }) => {
       </Card>
     </Container>
   );
-};
+}
 
 const mapStateToProps = state => ({
   login: state.login,

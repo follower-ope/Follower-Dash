@@ -7,7 +7,7 @@ import { GetProjectDetails } from '../../services/ProjectService';
 import { Container, Content, UsersContent } from './style';
 import { ChartContent, Button } from '../../styles/components';
 
-const ProjectDetails = props => {
+function ProjectDetails(props) {
   const [project, setProject] = useState({});
   const [pieData, setPieData] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
@@ -189,7 +189,7 @@ const ProjectDetails = props => {
       </Content>
     </>
   );
-};
+}
 
 export default ProjectDetails;
 

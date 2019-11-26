@@ -3,7 +3,7 @@ import { GetUsers } from '../../services/UserService';
 import { GetProjects } from '../../services/ProjectService';
 import { Content, Card } from './style';
 
-const Home = () => {
+function Home() {
   const [qtdUsers, setQtdUsers] = useState({});
   const [qtdProjects, setQtdProject] = useState(0);
 
@@ -36,6 +36,6 @@ const Home = () => {
       </Content>
     </>
   );
-};
+}
 
 export default Home;

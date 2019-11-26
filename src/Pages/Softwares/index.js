@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table } from '../../styles/components';
 import { GetSoftwares } from '../../services/SoftwaresService';
 
-const Softwares = () => {
+function Softwares() {
   const [softwares, setSoftwares] = useState([]);
 
   const fetchSoftwares = async () => {
@@ -46,6 +46,6 @@ const Softwares = () => {
       </Table>
     </>
   );
-};
+}
 
 export default Softwares;

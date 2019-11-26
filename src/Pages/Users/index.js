@@ -6,7 +6,7 @@ import { Title } from './styles';
 
 import CreateUser from '../../components/CreateUser';
 
-const Users = () => {
+function Users() {
   const [users, setUsers] = useState([]);
   const [usersIncomplete, setUsersIncomplete] = useState([]);
   const [creatingUser, setCreatingUser] = useState(false);
@@ -85,6 +85,6 @@ const Users = () => {
       </Table>
     </>
   );
-};
+}
 
 export default Users;

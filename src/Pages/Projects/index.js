@@ -5,7 +5,7 @@ import { Table, Button } from '../../styles/components';
 import { GetProjects } from '../../services/ProjectService';
 import CreateProject from '../../components/CreateProject';
 
-const Projects = () => {
+function Projects() {
   const [projects, setProjects] = useState([]);
   const [creatingProject, setcreatingProject] = useState(false);
 
@@ -62,6 +62,6 @@ const Projects = () => {
       </Table>
     </div>
   );
-};
+}
 
 export default Projects;

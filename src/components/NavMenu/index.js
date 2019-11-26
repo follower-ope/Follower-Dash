@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Content } from './style';
 
-const NavMenu = () => {
+function NavMenu() {
   const [name, setName] = useState('');
 
   useEffect(() => {
@@ -23,6 +23,6 @@ const NavMenu = () => {
       </button>
     </Content>
   );
-};
+}
 
 export default NavMenu;
