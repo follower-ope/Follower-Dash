@@ -41,21 +41,13 @@ export const GetProjectDetails = async projectId => {
   }
 };
 
-export const CreateProject = async (title, description, time) => {
+export const SaveProject = async project => {
   try {
-    const response = await api.post(
-      '/projects',
-      {
-        title,
-        description,
-        time,
+    const response = await api.post('/projects', project, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-        },
-      }
-    );
+    });
 
     return response.data;
   } catch ({ response }) {

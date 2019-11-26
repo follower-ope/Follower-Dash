@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  GetUsers,
-  GetUsersIncomplete,
-  SaveUser,
-} from '../../services/UserService';
+import { GetUsers, GetUsersIncomplete } from '../../services/UserService';
 import { Table, Button } from '../../styles/components';
-import { Form, Title } from './styles';
+import { Title } from './styles';
+
+import CreateUser from '../../components/CreateUser';
 
 const Users = () => {
-  const [newUser, setNewUser] = useState({ username: '', name: '', email: '' });
   const [users, setUsers] = useState([]);
   const [usersIncomplete, setUsersIncomplete] = useState([]);
   const [creatingUser, setCreatingUser] = useState(false);
@@ -23,67 +20,20 @@ const Users = () => {
     fetchUsers();
   }, []);
 
-  const handleNewUserChange = obj => {
-    setNewUser({ ...newUser, ...obj });
-  };
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    const nUser = await SaveUser(newUser);
-
-    if (nUser) {
-      setUsers([...users, nUser]);
-      setNewUser({ username: '', name: '', email: '' });
-      setCreatingUser(false);
-    }
-  };
-
-  const handleNewUser = () => {
-    setCreatingUser(!creatingUser);
+  const updateUser = user => {
+    setUsers([...users, user]);
+    setCreatingUser(false);
   };
 
   return (
     <>
       <Title>
         <h1>Usuarios</h1>
-        <Button type="button" onClick={() => handleNewUser()}>
+        <Button type="button" onClick={() => setCreatingUser(!creatingUser)}>
           Novo Usuario
         </Button>
       </Title>
-      <div>
-        {creatingUser && (
-          <Form onSubmit={e => handleSubmit(e)}>
-            <label htmlFor="username">
-              Nome de Usuario
-              <input
-                type="text"
-                value={newUser.username}
-                onChange={e =>
-                  handleNewUserChange({ username: e.target.value })
-                }
-              />
-            </label>
-            <label htmlFor="nome">
-              Nome
-              <input
-                type="text"
-                value={newUser.name}
-                onChange={e => handleNewUserChange({ name: e.target.value })}
-              />
-            </label>
-            <label htmlFor="email">
-              Email
-              <input
-                type="text"
-                value={newUser.email}
-                onChange={e => handleNewUserChange({ email: e.target.value })}
-              />
-            </label>
-            <button type="submit">Salvar</button>
-          </Form>
-        )}
-      </div>
+      <div>{creatingUser && <CreateUser updateUser={updateUser} />}</div>
 
       <Table>
         <thead>

@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Title } from './styles';
 import { Table, Button } from '../../styles/components';
-import { GetProjects, CreateProject } from '../../services/ProjectService';
+import { GetProjects } from '../../services/ProjectService';
+import CreateProject from '../../components/CreateProject';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
-  const [newProject, setNewProject] = useState(false);
-  const [titleProject, setTitleProject] = useState('');
-  const [descProject, setDescProject] = useState('');
-  const [timeProject, setTimeProject] = useState('');
+  const [creatingProject, setcreatingProject] = useState(false);
 
   const fetchProjects = async () => {
     setProjects(await GetProjects());
@@ -19,72 +17,25 @@ const Projects = () => {
     fetchProjects();
   }, []);
 
-  const handleTitleProjectChange = e => setTitleProject(e.target.value);
-  const handleTimeProjectChange = e => setTimeProject(e.target.value);
-  const handleDescProjectChange = e => setDescProject(e.target.value);
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    const nProject = await CreateProject(
-      titleProject,
-      descProject,
-      timeProject
-    );
-
-    if (nProject) {
-      setProjects([...projects, nProject]);
-
-      setTitleProject('');
-      setTimeProject('');
-
-      setNewProject(false);
-    }
-  };
-
-  const handleNewProject = () => {
-    setNewProject(!newProject);
+  const updateProject = project => {
+    setProjects([...projects, project]);
+    setcreatingProject(false);
   };
 
   return (
     <div>
       <Title>
         <h1>Projetos</h1>
-        <Button type="button" onClick={() => handleNewProject()}>
+        <Button
+          type="button"
+          onClick={() => setcreatingProject(!creatingProject)}
+        >
           Novo Projeto
         </Button>
       </Title>
 
       <div>
-        {newProject && (
-          <form onSubmit={e => handleSubmit(e)}>
-            <label htmlFor="nome">
-              Nome
-              <input
-                type="text"
-                value={titleProject}
-                onChange={e => handleTitleProjectChange(e)}
-              />
-            </label>
-            <label htmlFor="descricao">
-              Descricao
-              <input
-                type="text"
-                value={descProject}
-                onChange={e => handleDescProjectChange(e)}
-              />
-            </label>
-            <label htmlFor="timeproject">
-              Time
-              <input
-                type="text"
-                value={timeProject}
-                onChange={e => handleTimeProjectChange(e)}
-              />
-            </label>
-            <button type="submit">Salvar</button>
-          </form>
-        )}
+        {creatingProject && <CreateProject updateProject={updateProject} />}
       </div>
 
       <Table>
