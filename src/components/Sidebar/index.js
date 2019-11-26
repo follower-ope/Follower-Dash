@@ -30,6 +30,14 @@ const Sidebar = () => (
           </NavLink>
         </li>
         <li>
+          <NavLink activeClassName="active" to="/profiles">
+            <p>
+              <FaUser />
+              <span>Perfils de usuario</span>
+            </p>
+          </NavLink>
+        </li>
+        <li>
           <NavLink activeClassName="active" to="/projetos">
             <p>
               <FaProjectDiagram />

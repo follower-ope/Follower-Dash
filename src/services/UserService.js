@@ -1,4 +1,6 @@
 import api from './api';
+import { GetProjectDetails } from './ProjectService';
+import { GetProfile } from './ProfileService';
 import { errorMessage, successMessage } from './Messages';
 
 export const GetUsers = async () => {
@@ -8,6 +10,24 @@ export const GetUsers = async () => {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     });
+
+    await Promise.all(
+      response.data.map(async user => {
+        if (user.project_id) {
+          const project = await GetProjectDetails(user.project_id);
+
+          user.project = project.title;
+        }
+
+        if (user.profile_id) {
+          const profile = await GetProfile(user.profile_id);
+          user.profile = profile.description;
+        }
+
+        return user;
+      })
+    );
+
     return response.data;
   } catch (err) {
     errorMessage('Ocorreu um erro ao carregar usuarios');
@@ -22,6 +42,14 @@ export const GetUser = async username => {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     });
+
+    const user = response.data[0];
+
+    if (user.project_id)
+      user.project = (await GetProjectDetails(user.project_id)).title;
+    if (user.profile_id)
+      user.profile = (await GetProfile(user.profile_id)).description;
+
     return response.data[0];
   } catch (err) {
     errorMessage('Ocorreu um erro ao carregar usuarios');
@@ -55,6 +83,21 @@ export const SaveUser = async user => {
   } catch ({ response }) {
     errorMessage(response ? response.data.error : 'Ocorreu um erro');
     return null;
+  }
+};
+
+export const UpdateUser = async user => {
+  try {
+    await api.put(`/users/${user.username}`, user, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+    successMessage('Atualizado usuario com sucesso');
+    return true;
+  } catch ({ response }) {
+    errorMessage(response ? response.data.error : 'Ocorreu um erro');
+    return false;
   }
 };
 

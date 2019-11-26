@@ -18,7 +18,9 @@ const NavMenu = () => {
   return (
     <Content>
       <p>Bem vindo {name}</p>
-      <button onClick={() => handleLoggout()}>Sair</button>
+      <button type="button" onClick={() => handleLoggout()}>
+        Sair
+      </button>
     </Content>
   );
 };

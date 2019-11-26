@@ -21,6 +21,7 @@ import Login from './Pages/Login';
 import Dasboards from './Pages/Dashboards';
 import ProjectDetails from './Pages/ProjectDetails';
 import Softwares from './Pages/Softwares';
+import Profiles from './Pages/Profiles';
 import NotFound from './components/NotFound';
 
 import store from './store';
@@ -44,6 +45,8 @@ const App = () => {
               layout={DashLayout}
               component={UserDetails}
             />
+
+            <Routes path="/profiles" layout={DashLayout} component={Profiles} />
 
             <Routes path="/projetos" layout={DashLayout} component={Projects} />
             <Routes
