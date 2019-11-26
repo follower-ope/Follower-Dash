@@ -7,34 +7,28 @@ import { GetProjectDetails } from '../../services/ProjectService';
 import { Container, Content, UsersContent } from './style';
 import { ChartContent, Button } from '../../styles/components';
 
-function ProjectDetails(props) {
+function ProjectDetails({ match }) {
   const [project, setProject] = useState({});
   const [pieData, setPieData] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
   const [users, setUsers] = useState([]);
 
-  const fetchUsers = async () => {
-    const user = await GetUsers();
-
-    if (project.users) {
-      setUsers(
-        user.filter(value => {
-          const userInProject = project.users.find(element => {
-            return element.username === value.username;
-          });
-
-          return !userInProject;
-        })
-      );
-    }
-  };
-
-  const fetchProjectDetails = async () => {
-    const { id } = props.match.params;
-    setProject(await GetProjectDetails(id));
-  };
-
   useEffect(() => {
+    const fetchUsers = async () => {
+      const user = await GetUsers();
+
+      if (project.users) {
+        setUsers(
+          user.filter(value => {
+            const userInProject = project.users.find(element => {
+              return element.username === value.username;
+            });
+
+            return !userInProject;
+          })
+        );
+      }
+    };
     fetchUsers();
   }, [project]);
 
@@ -100,11 +94,15 @@ function ProjectDetails(props) {
       ],
     });
 
+    const fetchProjectDetails = async () => {
+      const { id } = match.params;
+      setProject(await GetProjectDetails(id));
+    };
     fetchProjectDetails();
-  }, []);
+  }, [match.params]);
 
   const addUser = user => {
-    user.map(u => {
+    user.foreach(u => {
       setProject({
         ...project,
         users: [...project.users, { username: u.value, name: u.value }],

@@ -17,11 +17,7 @@ function UserDetails({ match }) {
       setProfiles(await GetProfiles());
     };
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  }, [match.params]);
 
   const handleChange = obj => {
     setUser({
