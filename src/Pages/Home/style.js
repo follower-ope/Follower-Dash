@@ -6,6 +6,15 @@ export const Content = styled.div`
   justify-content: space-around;
 `;
 
-export const ChartContainer = styled.div`
+export const Card = styled.div`
   background: #fff;
+  min-width: 300px;
+  min-height: 300px;
+
+  div {
+    width: 100%;
+    height: 20%;
+    padding: 20px;
+    text-align: center;
+  }
 `;
