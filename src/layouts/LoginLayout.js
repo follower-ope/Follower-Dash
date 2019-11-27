@@ -1,12 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const LoginLayout = ({ children }) => {
-  useEffect(() => {
-    if (window.localStorage.getItem('token')) {
-      window.location = '/home';
-    }
-  }, []);
-
   return <>{children}</>;
 };
 

@@ -10,6 +10,7 @@ export const Card = styled.div`
   background: #fff;
   min-width: 300px;
   min-height: 300px;
+  margin: 20px;
 
   div {
     width: 100%;

@@ -16,36 +16,56 @@ import Softwares from './Pages/Softwares';
 import Profiles from './Pages/Profiles';
 import NotFound from './components/NotFound';
 
-import Route from './components/Route';
+import { PublicRoute, PrivateRoute } from './components/Route';
 
 const Routes = () => {
   return (
     <BrowserRouter>
       <Wrapper>
         <Switch>
-          <Route exact path="/" layout={LoginLayout} component={Login} />
-          <Route path="/login" layout={LoginLayout} component={Login} />
-          <Route path="/home" layout={DashLayout} component={Home} />
+          <PublicRoute exact path="/" layout={LoginLayout} component={Login} />
+          <PublicRoute path="/login" layout={LoginLayout} component={Login} />
+          <PrivateRoute path="/home" layout={DashLayout} component={Home} />
 
-          <Route path="/usuarios" layout={DashLayout} component={Users} />
-          <Route
+          <PrivateRoute
+            path="/usuarios"
+            layout={DashLayout}
+            component={Users}
+          />
+          <PrivateRoute
             path="/usuario/:username"
             layout={DashLayout}
             component={UserDetails}
           />
 
-          <Route path="/profiles" layout={DashLayout} component={Profiles} />
+          <PrivateRoute
+            path="/profiles"
+            layout={DashLayout}
+            component={Profiles}
+          />
 
-          <Route path="/projetos" layout={DashLayout} component={Projects} />
-          <Route
+          <PrivateRoute
+            path="/projetos"
+            layout={DashLayout}
+            component={Projects}
+          />
+          <PrivateRoute
             path="/projeto/:id"
             layout={DashLayout}
             component={ProjectDetails}
           />
 
-          <Route path="/softwares" layout={DashLayout} component={Softwares} />
-          <Route path="/Dashboards" layout={DashLayout} component={Dasboards} />
-          <Route layout={DashLayout} component={NotFound} />
+          <PrivateRoute
+            path="/softwares"
+            layout={DashLayout}
+            component={Softwares}
+          />
+          <PrivateRoute
+            path="/Dashboards"
+            layout={DashLayout}
+            component={Dasboards}
+          />
+          <PrivateRoute layout={DashLayout} component={NotFound} />
         </Switch>
       </Wrapper>
     </BrowserRouter>
