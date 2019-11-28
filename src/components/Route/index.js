@@ -24,7 +24,7 @@ export const PrivateRoute = ({
   layout: Layout,
   ...rest
 }) => {
-  const logged = window.localStorage.getItem('token') ? true : false;
+  const logged = !!window.localStorage.getItem('token');
   return (
     <Route
       {...rest}

@@ -19,11 +19,17 @@ import NotFound from './components/NotFound';
 import { PublicRoute, PrivateRoute } from './components/Route';
 
 const Routes = () => {
+  const logged = window.localStorage.getItem('token');
   return (
     <BrowserRouter>
       <Wrapper>
         <Switch>
-          <PublicRoute exact path="/" layout={LoginLayout} component={Login} />
+          <PublicRoute
+            exact
+            path="/"
+            layout={logged ? DashLayout : LoginLayout}
+            component={logged ? Home : Login}
+          />
           <PublicRoute path="/login" layout={LoginLayout} component={Login} />
           <PrivateRoute path="/home" layout={DashLayout} component={Home} />
 

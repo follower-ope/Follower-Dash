@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Content, Main, Container } from '../styles/components';
 
@@ -6,12 +6,6 @@ import Sidebar from '../components/Sidebar';
 import NavMenu from '../components/NavMenu';
 
 const DashLayout = ({ children }) => {
-  useEffect(() => {
-    if (!window.localStorage.getItem('token')) {
-      window.location = '/login';
-    }
-  }, []);
-
   return (
     <>
       <Content>
