@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SaveUser } from '../../services/UserService';
+import { Button } from '../../styles/components';
 import { Form } from './styles';
 
 function CreateUser({ updateUser }) {
@@ -23,30 +24,30 @@ function CreateUser({ updateUser }) {
   return (
     <Form onSubmit={e => handleSubmit(e)}>
       <label htmlFor="username">
-        Nome de Usuario
         <input
           type="text"
           value={user.username}
+          placeholder="Nome de usuario"
           onChange={e => handleUserChange({ username: e.target.value })}
         />
       </label>
       <label htmlFor="nome">
-        Nome
         <input
           type="text"
           value={user.name}
+          placeholder="Nome"
           onChange={e => handleUserChange({ name: e.target.value })}
         />
       </label>
       <label htmlFor="email">
-        Email
         <input
           type="text"
           value={user.email}
+          placeholder="Email"
           onChange={e => handleUserChange({ email: e.target.value })}
         />
       </label>
-      <button type="submit">Salvar</button>
+      <Button type="submit">Salvar</Button>
     </Form>
   );
 }

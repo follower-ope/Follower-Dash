@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { SaveProfile } from '../../services/ProfileService';
+import { Button } from '../../styles/components';
+import { Form } from './styles';
 
 function CreateProfile({ updateProfile }) {
   const [profile, setProfile] = useState({ description: '' });
@@ -19,17 +21,17 @@ function CreateProfile({ updateProfile }) {
   };
 
   return (
-    <form onSubmit={e => handleSubmit(e)}>
+    <Form onSubmit={e => handleSubmit(e)}>
       <label htmlFor="description">
-        Nome
         <input
           type="text"
+          placeholder="Nome do Perfil"
           value={profile.description}
           onChange={e => handleChange({ description: e.target.value })}
         />
       </label>
-      <button type="submit">Salvar</button>
-    </form>
+      <Button type="submit">Salvar</Button>
+    </Form>
   );
 }
 

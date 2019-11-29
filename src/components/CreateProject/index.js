@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { SaveProject } from '../../services/ProjectService';
+import { Button } from '../../styles/components';
+import { Form } from './styles';
 
 function CreateProject({ updateProject }) {
   const [project, setProject] = useState({
@@ -24,33 +26,33 @@ function CreateProject({ updateProject }) {
   };
 
   return (
-    <form onSubmit={e => handleSubmit(e)}>
+    <Form onSubmit={e => handleSubmit(e)}>
       <label htmlFor="nome">
-        Nome
         <input
           type="text"
+          placeholder="Nome"
           value={project.title}
           onChange={e => handleChange({ title: e.target.value })}
         />
       </label>
       <label htmlFor="descricao">
-        Descricao
         <input
           type="text"
+          placeholder="Descricao"
           value={project.description}
           onChange={e => handleChange({ description: e.target.value })}
         />
       </label>
       <label htmlFor="timeproject">
-        Time
         <input
           type="text"
+          placeholder="Tempo do projeto (Hrs)"
           value={project.time}
           onChange={e => handleChange({ time: e.target.value })}
         />
       </label>
-      <button type="submit">Salvar</button>
-    </form>
+      <Button type="submit">Salvar</Button>
+    </Form>
   );
 }
 
