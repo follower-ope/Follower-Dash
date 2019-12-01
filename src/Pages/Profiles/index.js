@@ -48,7 +48,7 @@ function Profiles() {
             <tr key={profile.description}>
               <td>{profile.description}</td>
               <td>
-                <Link to={`/usuario/${profile.description}`}>ver mais</Link>
+                <Link to={`/profile/${profile.id}`}>ver mais</Link>
               </td>
             </tr>
           ))}

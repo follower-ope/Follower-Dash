@@ -43,3 +43,18 @@ export const GetProfile = async profileId => {
     return null;
   }
 };
+
+export const GetProfileSoftwares = async profileId => {
+  try {
+    const response = await api.get(`/profilesSoftwares/${profileId}`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    errorMessage('Ocorreu um erro ao carregar usuarios');
+    return [];
+  }
+};
