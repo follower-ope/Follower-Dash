@@ -10,7 +10,8 @@ export const Form = styled.form`
     margin: 0 10px;
   }
 
-  input {
+  input,
+  select {
     border-radius: 2px;
     border: 1px solid #7b6cfa;
     margin-top: 4px;

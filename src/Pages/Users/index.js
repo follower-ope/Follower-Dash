@@ -43,19 +43,41 @@ function Users() {
             <th>Email</th>
             <th>Perfil</th>
             <th>Projeto</th>
-            <th />
           </tr>
         </thead>
         <tbody>
           {users.map(user => (
             <tr key={user.username}>
-              <td>{user.username}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.profile}</td>
-              <td>{user.project}</td>
               <td>
-                <Link to={`/usuario/${user.username}`}>ver mais</Link>
+                <Link to={`/usuario/${user.username}`}>{user.username}</Link>
+              </td>
+              <td>
+                {user.name ? (
+                  user.name
+                ) : (
+                  <span className="faded">Não possui</span>
+                )}
+              </td>
+              <td>
+                {user.email ? (
+                  user.email
+                ) : (
+                  <span className="faded">Não possui</span>
+                )}
+              </td>
+              <td>
+                {user.Profile ? (
+                  user.Profile.description
+                ) : (
+                  <span className="faded">Não possui</span>
+                )}
+              </td>
+              <td>
+                {user.Project ? (
+                  user.Project.title
+                ) : (
+                  <span className="faded">Não possui</span>
+                )}
               </td>
             </tr>
           ))}
@@ -69,6 +91,7 @@ function Users() {
             <th>Nome de usuario</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Perfil</th>
             <th>Projeto</th>
           </tr>
         </thead>
@@ -76,9 +99,34 @@ function Users() {
           {usersIncomplete.map(user => (
             <tr key={user.username}>
               <td>{user.username}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.project}</td>
+              <td>
+                {user.name ? (
+                  user.name
+                ) : (
+                  <span className="faded">Não possui</span>
+                )}
+              </td>
+              <td>
+                {user.email ? (
+                  user.email
+                ) : (
+                  <span className="faded">Não possui</span>
+                )}
+              </td>
+              <td>
+                {user.Profile ? (
+                  user.Profile.description
+                ) : (
+                  <span className="faded">Não possui</span>
+                )}
+              </td>
+              <td>
+                {user.Project ? (
+                  user.Project.title
+                ) : (
+                  <span className="faded">Não possui</span>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

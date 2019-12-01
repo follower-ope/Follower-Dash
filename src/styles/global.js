@@ -27,4 +27,13 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  a:hover {
+    color: #3b00ca;
+  }
 `;
