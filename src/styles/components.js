@@ -13,9 +13,13 @@ export const Content = styled.div`
 
 export const Main = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Container = styled.div`
+  overflow-y: scroll;
+  flex: 1;
   padding: 25px;
 `;
 

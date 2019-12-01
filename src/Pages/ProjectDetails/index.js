@@ -102,14 +102,15 @@ function ProjectDetails({ match }) {
   }, [match.params]);
 
   const addUser = user => {
-    user.foreach(u => {
-      setProject({
-        ...project,
-        users: [...project.users, { username: u.value, name: u.value }],
-      });
-
-      ChangeUserProject(u.value, project.id);
+    setProject({
+      ...project,
+      users: [
+        ...project.users,
+        { username: user[0].value, name: user[0].value },
+      ],
     });
+
+    ChangeUserProject(user[0].value, project.id);
   };
 
   const handleRemoveUser = username => {
@@ -192,5 +193,7 @@ function ProjectDetails({ match }) {
 export default ProjectDetails;
 
 ProjectDetails.propTypes = {
-  match: PropTypes.element.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
 };
