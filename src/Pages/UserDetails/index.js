@@ -19,11 +19,18 @@ function UserDetails({ match }) {
   const [pieData, setPieData] = useState({});
 
   useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  useEffect(() => {
     const fetchData = async () => {
       const { username } = match.params;
       setUser(await GetUser(username));
-      setProjects(await GetProjects());
-      setProfiles(await GetProfiles());
+      setProjects([{ id: 0, title: 'Selecione..' }, ...(await GetProjects())]);
+      setProfiles([
+        { id: 0, description: 'Selecione..' },
+        ...(await GetProfiles()),
+      ]);
     };
     fetchData();
   }, [match.params]);
@@ -87,7 +94,7 @@ function UserDetails({ match }) {
                   <option
                     key={profile.id}
                     value={profile.id}
-                    selected={user.profile === profile.description}
+                    selected={user.Profile.id === profile.id}
                   >
                     {profile.description}
                   </option>
@@ -115,7 +122,7 @@ function UserDetails({ match }) {
                   <option
                     key={project.id}
                     value={project.id}
-                    selected={user.project === project.title}
+                    selected={user.Project && user.Project.id === project.id}
                   >
                     {project.title}
                   </option>
@@ -147,7 +154,9 @@ function UserDetails({ match }) {
 }
 
 UserDetails.propTypes = {
-  match: PropTypes.element.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
 };
 
 export default UserDetails;

@@ -43,14 +43,7 @@ export const GetUser = async username => {
       },
     });
 
-    const user = response.data[0];
-
-    if (user.project_id)
-      user.project = (await GetProjectDetails(user.project_id)).title;
-    if (user.profile_id)
-      user.profile = (await GetProfile(user.profile_id)).description;
-
-    return response.data[0];
+    return response.data;
   } catch (err) {
     errorMessage('Ocorreu um erro ao carregar usuarios');
     return [];
