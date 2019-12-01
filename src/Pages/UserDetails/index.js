@@ -94,7 +94,7 @@ function UserDetails({ match }) {
                   <option
                     key={profile.id}
                     value={profile.id}
-                    selected={user.Profile.id === profile.id}
+                    selected={user.Profile && user.Profile.id === profile.id}
                   >
                     {profile.description}
                   </option>
