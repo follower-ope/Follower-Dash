@@ -14,6 +14,7 @@ import Dasboards from './Pages/Dashboards';
 import ProjectDetails from './Pages/ProjectDetails';
 import Softwares from './Pages/Softwares';
 import Profiles from './Pages/Profiles';
+import UsersActivities from './Pages/UsersActivities';
 import NotFound from './components/NotFound';
 
 import { PublicRoute, PrivateRoute } from './components/Route';
@@ -42,6 +43,11 @@ const Routes = () => {
             path="/usuario/:username"
             layout={DashLayout}
             component={UserDetails}
+          />
+          <PrivateRoute
+            path="/activities"
+            layout={DashLayout}
+            component={UsersActivities}
           />
 
           <PrivateRoute

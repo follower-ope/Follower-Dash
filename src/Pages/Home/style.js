@@ -8,9 +8,8 @@ export const Content = styled.div`
 
 export const Card = styled.div`
   background: #fff;
-  min-width: 300px;
-  min-height: 300px;
   margin: 20px;
+  flex: 1;
 
   div {
     width: 100%;

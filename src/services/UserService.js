@@ -126,3 +126,24 @@ export const ChangeUserProject = async (username, projectId) => {
     return false;
   }
 };
+
+export const Activities = async (startDate, endDate) => {
+  try {
+    const response = await api.post(
+      '/usersActivities',
+      {
+        startDate,
+        endDate,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
+    return response.data;
+  } catch ({ response }) {
+    errorMessage(response ? response.data.error : 'Ocorreu um erro');
+    return null;
+  }
+};

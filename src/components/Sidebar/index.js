@@ -46,6 +46,14 @@ const Sidebar = () => (
           </NavLink>
         </li>
         <li>
+          <NavLink activeClassName="active" to="/activities">
+            <p>
+              <MdExtension />
+              <span>Entra/Saida</span>
+            </p>
+          </NavLink>
+        </li>
+        <li>
           <NavLink activeClassName="active" to="/softwares">
             <p>
               <MdExtension />

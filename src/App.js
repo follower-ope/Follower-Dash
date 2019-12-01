@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactNotification from 'react-notifications-component';
+import { Provider } from 'react-redux';
 import Routes from './routes';
 import GlobalStyle from './styles/global';
-
-import { Provider } from 'react-redux';
 
 import './config/reactotron';
 import store from './store';
