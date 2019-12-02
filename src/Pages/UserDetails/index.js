@@ -1,61 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Chart from 'react-apexcharts';
-import DatePicker from 'react-datepicker';
+
 import { GetUser, UpdateUser } from '../../services/UserService';
 import { GetProjects } from '../../services/ProjectService';
 import { GetProfiles } from '../../services/ProfileService';
-
 import { Button } from '../../styles/components';
-import { Form, ChartContent } from './styles';
+import { Form } from './styles';
+import UserProductivity from '../../components/UserProductiviryChart';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
 function UserDetails({ match }) {
   const [user, setUser] = useState({});
-  const [startDate, setStartDate] = useState(new Date());
   const [projects, setProjects] = useState([]);
   const [profiles, setProfiles] = useState([]);
-  const [pieData, setPieData] = useState({});
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
 
   useEffect(() => {
     const fetchData = async () => {
       const { username } = match.params;
       setUser(await GetUser(username));
-      setProjects([{ id: 0, title: 'Selecione..' }, ...(await GetProjects())]);
+      setProjects([
+        { id: null, title: 'Selecione..' },
+        ...(await GetProjects()),
+      ]);
       setProfiles([
-        { id: 0, description: 'Selecione..' },
+        { id: null, description: 'Selecione..' },
         ...(await GetProfiles()),
       ]);
     };
     fetchData();
   }, [match.params]);
-
-  useEffect(() => {
-    setPieData({
-      options: {
-        labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 300,
-              },
-              legend: {
-                position: 'bottom',
-              },
-            },
-          },
-        ],
-      },
-      series: [100, 55],
-    });
-  }, []);
 
   const handleChange = obj => {
     setUser({
@@ -134,21 +108,7 @@ function UserDetails({ match }) {
 
         <Button type="submit">Salvar</Button>
       </Form>
-      <ChartContent>
-        <DatePicker
-          dateFormat="yyyy/MM/dd"
-          selected={startDate}
-          onChange={date => setStartDate(date)}
-        />
-        {pieData.options && (
-          <Chart
-            options={pieData.options}
-            series={pieData.series}
-            type="pie"
-            width="380"
-          />
-        )}
-      </ChartContent>
+      {user.username && <UserProductivity username={user.username} />}
     </>
   );
 }

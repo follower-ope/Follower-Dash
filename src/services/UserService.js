@@ -120,11 +120,12 @@ export const ChangeUserProject = async (username, projectId) => {
   }
 };
 
-export const Activities = async (startDate, endDate) => {
+export const Activities = async (startDate, endDate, username = null) => {
   try {
     const response = await api.post(
       '/usersActivities',
       {
+        username,
         startDate,
         endDate,
       },
@@ -134,6 +135,29 @@ export const Activities = async (startDate, endDate) => {
         },
       }
     );
+    return response.data;
+  } catch ({ response }) {
+    errorMessage(response ? response.data.error : 'Ocorreu um erro');
+    return null;
+  }
+};
+
+export const Productivity = async (username, startDate, endDate) => {
+  try {
+    const response = await api.post(
+      '/userProductivity',
+      {
+        username,
+        startDate,
+        endDate,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
+
     return response.data;
   } catch ({ response }) {
     errorMessage(response ? response.data.error : 'Ocorreu um erro');

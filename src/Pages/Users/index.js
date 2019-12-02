@@ -55,28 +55,28 @@ function Users() {
                 {user.name ? (
                   user.name
                 ) : (
-                  <span className="faded">Não possui</span>
+                  <span className="faded">Não informado</span>
                 )}
               </td>
               <td>
                 {user.email ? (
                   user.email
                 ) : (
-                  <span className="faded">Não possui</span>
+                  <span className="faded">Não informado</span>
                 )}
               </td>
               <td>
                 {user.Profile ? (
                   user.Profile.description
                 ) : (
-                  <span className="faded">Não possui</span>
+                  <span className="faded">Não informado</span>
                 )}
               </td>
               <td>
                 {user.Project ? (
                   user.Project.title
                 ) : (
-                  <span className="faded">Não possui</span>
+                  <span className="faded">Não informado</span>
                 )}
               </td>
             </tr>
@@ -103,28 +103,28 @@ function Users() {
                 {user.name ? (
                   user.name
                 ) : (
-                  <span className="faded">Não possui</span>
+                  <span className="faded">Não informado</span>
                 )}
               </td>
               <td>
                 {user.email ? (
                   user.email
                 ) : (
-                  <span className="faded">Não possui</span>
+                  <span className="faded">Não informado</span>
                 )}
               </td>
               <td>
                 {user.Profile ? (
                   user.Profile.description
                 ) : (
-                  <span className="faded">Não possui</span>
+                  <span className="faded">Não informado</span>
                 )}
               </td>
               <td>
                 {user.Project ? (
                   user.Project.title
                 ) : (
-                  <span className="faded">Não possui</span>
+                  <span className="faded">Não informado</span>
                 )}
               </td>
             </tr>

@@ -29,7 +29,3 @@ export const Form = styled.form`
     padding: 3px;
   }
 `;
-
-export const ChartContent = styled.div`
-  background: #fff;
-`;
