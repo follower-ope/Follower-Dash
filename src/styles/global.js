@@ -36,4 +36,6 @@ export default createGlobalStyle`
   a:hover {
     color: #3b00ca;
   }
+
+
 `;

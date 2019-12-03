@@ -35,7 +35,7 @@ function LoginForm({ loginRequest, loading }) {
         onChange={e => setLogin({ ...login, password: e.target.value })}
       />
       <button type="submit" disabled={loading}>
-        {loading ? <FaSpinner /> : 'Entrar'}
+        {loading ? <FaSpinner className="rotate" /> : 'Entrar'}
       </button>
     </form>
   );

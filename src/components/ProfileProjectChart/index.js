@@ -56,10 +56,6 @@ function ProfileProjectChart({ profiles }) {
     }
   }, [profile, profilesList]);
 
-  useEffect(() => {
-    // console.log(horas);
-  }, [horas]);
-
   return (
     <>
       <h1>Perfil</h1>

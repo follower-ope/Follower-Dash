@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import Chart from 'react-apexcharts';
 import PropTypes from 'prop-types';
-import { format, addHours } from 'date-fns';
 import DatePicker from 'react-datepicker';
+import Loading from '../../components/Loading';
+import { format, addHours } from 'date-fns';
 import { ChartContent } from './styles';
 import { Productivity, Activities } from '../../services/UserService';
 
@@ -34,7 +35,7 @@ function UserProductivityChart({ username }) {
       }
 
       const data = await Productivity(username, dateFormat, dateFormat);
-      console.log(data);
+
       if (data) {
         setLoading(false);
         setPieData({
@@ -83,7 +84,7 @@ function UserProductivityChart({ username }) {
       />
 
       {loading ? (
-        <p>carregando</p>
+        <Loading />
       ) : nonData ? (
         <p>sem dados</p>
       ) : (
@@ -100,7 +101,7 @@ function UserProductivityChart({ username }) {
 
       <ChartContent>
         {loading ? (
-          <p>carregando</p>
+          <Loading />
         ) : nonData ? (
           <p>sem dados para mostrar nesse periodo</p>
         ) : (
