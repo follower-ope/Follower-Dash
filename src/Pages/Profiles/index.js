@@ -40,15 +40,13 @@ function Profiles() {
         <thead>
           <tr>
             <th>Perfil</th>
-            <th />
           </tr>
         </thead>
         <tbody>
           {profiles.map(profile => (
             <tr key={profile.description}>
-              <td>{profile.description}</td>
               <td>
-                <Link to={`/profile/${profile.id}`}>ver mais</Link>
+                <Link to={`/profile/${profile.id}`}>{profile.description}</Link>
               </td>
             </tr>
           ))}

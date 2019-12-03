@@ -44,18 +44,16 @@ function Projects() {
             <th>Nome</th>
             <th>Descricao</th>
             <th>Horas</th>
-            <th />
           </tr>
         </thead>
         <tbody>
           {projects.map(project => (
             <tr key={project.id}>
-              <td>{project.title}</td>
+              <td>
+                <Link to={`/projeto/${project.id}`}>{project.title}</Link>
+              </td>
               <td>{project.description}</td>
               <td>{project.time}</td>
-              <td>
-                <Link to={`/projeto/${project.id}`}>ver mais</Link>
-              </td>
             </tr>
           ))}
         </tbody>

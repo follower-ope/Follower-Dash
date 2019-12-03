@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GetUsers } from '../../services/UserService';
+import { GetUsers, GetUsersIncomplete } from '../../services/UserService';
 import { GetProjects } from '../../services/ProjectService';
 import { Content, Card } from './style';
 
@@ -9,7 +9,7 @@ function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const users = await GetUsers();
+      const users = [...(await GetUsers()), ...(await GetUsersIncomplete())];
       setQtdUsers({ total: users.length });
 
       const projects = await GetProjects();
