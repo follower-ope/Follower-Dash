@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Chart from 'react-apexcharts';
 import Select from 'react-dropdown-select';
+import ProfileProjectChart from '../../components/ProfileProjectChart';
 import { GetUsers, ChangeUserProject } from '../../services/UserService';
 import { GetProjectDetails } from '../../services/ProjectService';
 import { Container, Content, UsersContent } from './style';
@@ -9,7 +10,6 @@ import { ChartContent, Button } from '../../styles/components';
 
 function ProjectDetails({ match }) {
   const [project, setProject] = useState({});
-  const [pieData, setPieData] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
   const [users, setUsers] = useState([]);
 
@@ -33,26 +33,6 @@ function ProjectDetails({ match }) {
   }, [project]);
 
   useEffect(() => {
-    setPieData({
-      options: {
-        labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 300,
-              },
-              legend: {
-                position: 'bottom',
-              },
-            },
-          },
-        ],
-      },
-      series: [100, 55],
-    });
-
     setAreaChartData({
       options: {
         dataLabels: {
@@ -159,17 +139,9 @@ function ProjectDetails({ match }) {
 
         <Container>
           <ChartContent>
-            <h1>Titulo</h1>
-            <div>
-              {pieData.options && (
-                <Chart
-                  options={pieData.options}
-                  series={pieData.series}
-                  type="pie"
-                  width="380"
-                />
-              )}
-            </div>
+            {project.profiles && (
+              <ProfileProjectChart profiles={project.profiles} />
+            )}
           </ChartContent>
           <ChartContent>
             <h1>Titulo</h1>

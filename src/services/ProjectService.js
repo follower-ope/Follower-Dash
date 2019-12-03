@@ -29,9 +29,19 @@ export const GetProjectDetails = async projectId => {
       },
     });
 
+    const responseProfileProject = await api.get(
+      `/projectProfileProductivity/${projectId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
+
     const project = {
       ...responseProject.data,
       users: responseUsersProject.data,
+      profiles: responseProfileProject.data.profiles,
     };
 
     return project;
