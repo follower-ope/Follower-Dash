@@ -34,11 +34,21 @@ function UserProductivityChart({ username }) {
       }
 
       const data = await Productivity(username, dateFormat, dateFormat);
+      console.log(data);
       if (data) {
         setLoading(false);
         setPieData({
           options: {
             labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
+            tooltip: {
+              y: {
+                formatter: seriesValue =>
+                  moment()
+                    .startOf('day')
+                    .add(seriesValue, 'minutes')
+                    .format('hh:mm'),
+              },
+            },
             responsive: [
               {
                 breakpoint: 480,

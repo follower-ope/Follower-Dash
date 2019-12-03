@@ -17,6 +17,7 @@ function ProfileProjectChart({ profiles }) {
   useEffect(() => {
     if (profile || profilesList[0]) {
       const hrs = profiles[profile || profilesList[0]];
+
       const hrsImprodutiva = moment.duration(hrs.horasImprodutivas).asMinutes();
       const hrsProdutiva = moment.duration(hrs.horasProdutivas).asMinutes();
       setHoras({
@@ -27,6 +28,15 @@ function ProfileProjectChart({ profiles }) {
       setPieData({
         options: {
           labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
+          tooltip: {
+            y: {
+              formatter: seriesValue =>
+                moment()
+                  .startOf('day')
+                  .add(seriesValue, 'minutes')
+                  .format('hh:mm'),
+            },
+          },
           responsive: [
             {
               breakpoint: 480,
