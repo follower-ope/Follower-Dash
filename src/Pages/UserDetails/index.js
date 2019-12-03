@@ -6,7 +6,7 @@ import { GetProjects } from '../../services/ProjectService';
 import { GetProfiles } from '../../services/ProfileService';
 import { Button } from '../../styles/components';
 import { Form } from './styles';
-import UserProductivity from '../../components/UserProductiviryChart';
+import UserProductivity from '../../components/UserProductivityChart';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -53,7 +53,7 @@ function UserDetails({ match }) {
               name
               <input
                 type="text"
-                value={user.name}
+                value={user.name || ''}
                 onChange={e => handleChange({ name: e.target.value })}
               />
             </label>
@@ -82,7 +82,7 @@ function UserDetails({ match }) {
               email
               <input
                 type="text"
-                value={user.email}
+                value={user.email || ''}
                 onChange={e => handleChange({ email: e.target.value })}
               />
             </label>

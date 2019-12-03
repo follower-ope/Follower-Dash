@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { GetUsers, GetUsersIncomplete } from '../../services/UserService';
-import { Table, Button } from '../../styles/components';
+import { Button } from '../../styles/components';
 import { Title } from './styles';
 
 import UserList from '../../components/UsersList';

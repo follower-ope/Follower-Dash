@@ -8,24 +8,34 @@ import { ChartContent } from './styles';
 import { Productivity, Activities } from '../../services/UserService';
 
 function UserProductivityChart({ username }) {
+  const [loading, setLoading] = useState(true);
+  const [nonData, setNonData] = useState(false);
   const [date, setStartDate] = useState(new Date());
   const [activities, setActivities] = useState({ entrada: null, saida: null });
   const [pieData, setPieData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const dateFormat = format(new Date(date), 'yyy-MM-dd');
 
       const entradaSaida = await Activities(dateFormat, dateFormat, username);
+
       if (entradaSaida[0]) {
+        setNonData(false);
         setActivities({
           entrada: entradaSaida[0].startdate,
           saida: entradaSaida[0].finishdate,
         });
+      } else {
+        setLoading(false);
+        setNonData(true);
+        return;
       }
 
       const data = await Productivity(username, dateFormat, dateFormat);
       if (data) {
+        setLoading(false);
         setPieData({
           options: {
             labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
@@ -50,6 +60,7 @@ function UserProductivityChart({ username }) {
         });
       }
     };
+
     fetchData();
   }, [date]);
 
@@ -60,23 +71,37 @@ function UserProductivityChart({ username }) {
         selected={date}
         onChange={dt => setStartDate(dt)}
       />
-      <div>
-        <p>
-          Entrada:
-          {format(addHours(new Date(activities.entrada), 3), 'HH:mm:ss')}
-        </p>
-        <p>
-          saida: {format(addHours(new Date(activities.saida), 3), 'HH:mm:ss')}
-        </p>
-      </div>
+
+      {loading ? (
+        <p>carregando</p>
+      ) : nonData ? (
+        <p>sem dados</p>
+      ) : (
+        <div>
+          <p>
+            Entrada:
+            {format(addHours(new Date(activities.entrada), 3), 'HH:mm:ss')}
+          </p>
+          <p>
+            saida: {format(addHours(new Date(activities.saida), 3), 'HH:mm:ss')}
+          </p>
+        </div>
+      )}
+
       <ChartContent>
-        {pieData.options && (
-          <Chart
-            options={pieData.options}
-            series={pieData.series}
-            type="pie"
-            width="380"
-          />
+        {loading ? (
+          <p>carregando</p>
+        ) : nonData ? (
+          <p>sem dados para mostrar nesse periodo</p>
+        ) : (
+          pieData.options && (
+            <Chart
+              options={pieData.options}
+              series={pieData.series}
+              type="pie"
+              width="380"
+            />
+          )
         )}
       </ChartContent>
     </>
@@ -86,5 +111,5 @@ function UserProductivityChart({ username }) {
 export default UserProductivityChart;
 
 UserProductivityChart.propTypes = {
-  username: PropTypes.isRequired,
+  username: PropTypes.string.isRequired,
 };
