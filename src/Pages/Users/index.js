@@ -4,6 +4,7 @@ import { GetUsers, GetUsersIncomplete } from '../../services/UserService';
 import { Table, Button } from '../../styles/components';
 import { Title } from './styles';
 
+import UserList from '../../components/UsersList';
 import CreateUser from '../../components/CreateUser';
 
 function Users() {
@@ -35,102 +36,10 @@ function Users() {
       </Title>
       <div>{creatingUser && <CreateUser updateUser={updateUser} />}</div>
 
-      <Table>
-        <thead>
-          <tr>
-            <th>Nome de usuario</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Perfil</th>
-            <th>Projeto</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map(user => (
-            <tr key={user.username}>
-              <td>
-                <Link to={`/usuario/${user.username}`}>{user.username}</Link>
-              </td>
-              <td>
-                {user.name ? (
-                  user.name
-                ) : (
-                  <span className="faded">Não informado</span>
-                )}
-              </td>
-              <td>
-                {user.email ? (
-                  user.email
-                ) : (
-                  <span className="faded">Não informado</span>
-                )}
-              </td>
-              <td>
-                {user.Profile ? (
-                  user.Profile.description
-                ) : (
-                  <span className="faded">Não informado</span>
-                )}
-              </td>
-              <td>
-                {user.Project ? (
-                  user.Project.title
-                ) : (
-                  <span className="faded">Não informado</span>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <UserList users={users} />
 
       <p>Usuarios com cadastro incompleto</p>
-      <Table>
-        <thead>
-          <tr>
-            <th>Nome de usuario</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Perfil</th>
-            <th>Projeto</th>
-          </tr>
-        </thead>
-        <tbody>
-          {usersIncomplete.map(user => (
-            <tr key={user.username}>
-              <td>{user.username}</td>
-              <td>
-                {user.name ? (
-                  user.name
-                ) : (
-                  <span className="faded">Não informado</span>
-                )}
-              </td>
-              <td>
-                {user.email ? (
-                  user.email
-                ) : (
-                  <span className="faded">Não informado</span>
-                )}
-              </td>
-              <td>
-                {user.Profile ? (
-                  user.Profile.description
-                ) : (
-                  <span className="faded">Não informado</span>
-                )}
-              </td>
-              <td>
-                {user.Project ? (
-                  user.Project.title
-                ) : (
-                  <span className="faded">Não informado</span>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <UserList users={usersIncomplete} />
     </>
   );
 }
