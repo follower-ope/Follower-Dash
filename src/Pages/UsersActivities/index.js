@@ -11,13 +11,12 @@ function UsersActitivies() {
   const [loading, setLoading] = useState(true);
   const [activities, setActivities] = useState([]);
 
-  const fetchActivities = async () => {
-    setLoading(true);
-    setActivities(await Activities(date, date));
-    setLoading(false);
-  };
-
   useEffect(() => {
+    const fetchActivities = async () => {
+      setLoading(true);
+      setActivities(await Activities(date, date));
+      setLoading(false);
+    };
     fetchActivities();
   }, [date]);
 

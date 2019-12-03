@@ -7,16 +7,15 @@ function ProfileDetails({ match }) {
   const [profile, setProfile] = useState({});
   const [softwares, setSoftwares] = useState([]);
 
-  const { id } = match.params;
-  const fetchProfile = async () => {
-    setProfile(await GetProfile(id));
-  };
-
-  const fetchSoftwares = async () => {
-    setSoftwares(await GetProfileSoftwares(id));
-  };
-
   useEffect(() => {
+    const { id } = match.params;
+    const fetchProfile = async () => {
+      setProfile(await GetProfile(id));
+    };
+
+    const fetchSoftwares = async () => {
+      setSoftwares(await GetProfileSoftwares(id));
+    };
     fetchProfile();
     fetchSoftwares();
   }, []);
