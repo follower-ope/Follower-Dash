@@ -35,6 +35,7 @@ function ProfileDetails({ match }) {
   useEffect(() => {
     const fetchSoftware = async () => {
       const sft = await GetSoftwares();
+
       setSoftwaresToAdd(
         sft.filter(item => {
           return !softwares.filter(lol => {
@@ -43,8 +44,10 @@ function ProfileDetails({ match }) {
         })
       );
     };
-    fetchSoftware();
-  }, []);
+    if (softwares) {
+      fetchSoftware();
+    }
+  }, [softwares]);
 
   const setSoftwareProductivity = async processName => {
     await SetSoftwareProfile({

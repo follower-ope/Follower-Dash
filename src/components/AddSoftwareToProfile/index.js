@@ -5,6 +5,7 @@ import { Form } from './styles';
 
 function AddSoftwareToProfile({ softwares, setSoftwareProductivity }) {
   const [processName, setProcessName] = useState('');
+
   const handleSubmit = e => {
     e.preventDefault();
     if (processName) {
