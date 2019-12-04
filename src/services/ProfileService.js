@@ -65,7 +65,7 @@ export const SetSoftwareProfile = async ({
   isProductive = true,
 }) => {
   try {
-    const response = await api.post(
+    await api.post(
       '/profilesSoftwares',
       {
         profile_id: profileId,
@@ -79,8 +79,38 @@ export const SetSoftwareProfile = async ({
       }
     );
 
-    console.log(response);
+    return true;
   } catch (err) {
-    console.log(err);
+    errorMessage('Ocorreu um erro ao classificar Software');
+    return false;
+  }
+};
+
+export const UpdateSoftwareProfile = async ({
+  id,
+  profileId,
+  processName,
+  isProductive = true,
+}) => {
+  try {
+    await api.put(
+      `/profilesSoftwares/${id}`,
+      {
+        profile_id: profileId,
+        process_name: processName,
+        is_productive: isProductive,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
+
+    successMessage('Alterado classificação com sucesso');
+    return true;
+  } catch (err) {
+    errorMessage('Ocorreu um erro ao classificar Software');
+    return false;
   }
 };

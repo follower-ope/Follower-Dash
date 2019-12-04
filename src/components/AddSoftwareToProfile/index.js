@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { errorMessage } from '../../services/Messages';
 import { Button } from '../../styles/components';
 import { Form } from './styles';
 
@@ -10,7 +11,7 @@ function AddSoftwareToProfile({ softwares, setSoftwareProductivity }) {
       setSoftwareProductivity(processName);
       setProcessName('');
     } else {
-      console.log('Selecione um Software');
+      errorMessage('Selecione um Software');
     }
   };
   const handleChangeSoftware = softwareId => {
@@ -27,7 +28,7 @@ function AddSoftwareToProfile({ softwares, setSoftwareProductivity }) {
           <option value="0">Selecione...</option>
           {softwares.map(software => (
             <option key={software.process_name} value={software.process_name}>
-              {software.name}
+              {software.process_name}
             </option>
           ))}
         </select>

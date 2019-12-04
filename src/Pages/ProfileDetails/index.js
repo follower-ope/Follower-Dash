@@ -7,6 +7,7 @@ import {
   GetProfile,
   GetProfileSoftwares,
   SetSoftwareProfile,
+  UpdateSoftwareProfile,
 } from '../../services/ProfileService';
 import AddSoftwareToProfile from '../../components/AddSoftwareToProfile';
 
@@ -34,15 +35,16 @@ function ProfileDetails({ match }) {
   useEffect(() => {
     const fetchSoftware = async () => {
       const sft = await GetSoftwares();
-
       setSoftwaresToAdd(
         sft.filter(item => {
-          return !softwares.includes(item.process_name);
+          return !softwares.filter(lol => {
+            return lol.software_id === item.process_name;
+          }).length;
         })
       );
     };
     fetchSoftware();
-  }, [softwares]);
+  }, []);
 
   const setSoftwareProductivity = async processName => {
     await SetSoftwareProfile({
@@ -53,6 +55,27 @@ function ProfileDetails({ match }) {
     fetchSoftwares();
   };
 
+  const change = async software => {
+    setSoftwares(
+      softwares.map(item => {
+        if (item.software_id === software.software_id) {
+          return {
+            ...item,
+            is_productive: software.productive,
+          };
+        }
+        return item;
+      })
+    );
+
+    await UpdateSoftwareProfile({
+      id: software.id,
+      profileId: profile.id,
+      processName: software.software_id,
+      isProductive: software.productive,
+    });
+  };
+
   return (
     <>
       <Title>
@@ -61,7 +84,7 @@ function ProfileDetails({ match }) {
           type="button"
           onClick={() => setcreatingSoftwareProfile(!creatingSoftwareProfile)}
         >
-          Novo Usuario
+          Cadastrar Software
         </Button>
       </Title>
       {creatingSoftwareProfile && (
@@ -72,20 +95,35 @@ function ProfileDetails({ match }) {
       )}
       <div>
         <p>
-          <b>Softwares produtivos</b>
+          <b>Produtividade de Softwares</b>
         </p>
         <Table>
           <thead>
             <tr>
-              <th />
+              <th>Software</th>
+              <th>Produtivo</th>
             </tr>
           </thead>
           <tbody>
-            {softwares.map(software => (
-              <tr key={software.software_id}>
-                <td>{software.software_id}</td>
-              </tr>
-            ))}
+            {softwares &&
+              softwares.map(software => (
+                <tr key={software.software_id}>
+                  <td>{software.software_id}</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={software.is_productive}
+                      onChange={e =>
+                        change({
+                          id: software.id,
+                          software_id: software.software_id,
+                          productive: e.target.checked,
+                        })
+                      }
+                    />
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </div>
