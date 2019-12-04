@@ -3,8 +3,8 @@ import moment from 'moment';
 import Chart from 'react-apexcharts';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
-import Loading from '../../components/Loading';
 import { format, addHours } from 'date-fns';
+import Loading from '../Loading';
 import { ChartContent } from './styles';
 import { Productivity, Activities } from '../../services/UserService';
 
@@ -43,11 +43,12 @@ function UserProductivityChart({ username }) {
             labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
             tooltip: {
               y: {
-                formatter: seriesValue =>
-                  moment()
-                    .startOf('day')
-                    .add(seriesValue, 'minutes')
-                    .format('hh:mm'),
+                formatter: seriesValue => {
+                  if (data.horasProdutivas.value === seriesValue) {
+                    return data.horasProdutivas.label;
+                  }
+                  return data.horasImprodutivas.label;
+                },
               },
             },
             responsive: [
@@ -64,10 +65,7 @@ function UserProductivityChart({ username }) {
               },
             ],
           },
-          series: [
-            moment.duration(data.horasProdutivas).asMinutes(),
-            moment.duration(data.horasImprodutivas).asMinutes(),
-          ],
+          series: [data.horasProdutivas.value, data.horasImprodutivas.value],
         });
       }
     };

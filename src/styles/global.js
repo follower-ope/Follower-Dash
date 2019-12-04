@@ -37,5 +37,7 @@ export default createGlobalStyle`
     color: #3b00ca;
   }
 
-
+  select {
+    background: #fff;
+  }
 `;

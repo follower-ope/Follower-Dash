@@ -58,3 +58,29 @@ export const GetProfileSoftwares = async profileId => {
     return [];
   }
 };
+
+export const SetSoftwareProfile = async ({
+  profileId,
+  processName,
+  isProductive = true,
+}) => {
+  try {
+    const response = await api.post(
+      '/profilesSoftwares',
+      {
+        profile_id: profileId,
+        process_name: processName,
+        is_productive: isProductive,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
+
+    console.log(response);
+  } catch (err) {
+    console.log(err);
+  }
+};
