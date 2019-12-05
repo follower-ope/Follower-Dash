@@ -10,6 +10,7 @@ export const Card = styled.div`
   background: #fff;
   margin: 20px;
   flex: 1;
+  cursor: pointer;
 
   &.blue {
     background: #242498;
