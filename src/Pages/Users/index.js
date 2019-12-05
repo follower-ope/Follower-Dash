@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { GetUsers, GetUsersIncomplete } from '../../services/UserService';
 import { Button } from '../../styles/components';
-import { Title } from './styles';
+import { Title, Content } from './styles';
 
+import Loading from '../../components/Loading';
 import UserList from '../../components/UsersList';
 import CreateUser from '../../components/CreateUser';
 
 function Users() {
+  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
   const [usersIncomplete, setUsersIncomplete] = useState([]);
   const [creatingUser, setCreatingUser] = useState(false);
-
-  const fetchUsers = async () => {
-    setUsers(await GetUsers());
-    setUsersIncomplete(await GetUsersIncomplete());
-  };
+  const [listUsersIncomplete, setListUsersIncomplete] = useState(false);
 
   useEffect(() => {
+    const fetchUsers = async () => {
+      setUsers(await GetUsers());
+      setLoading(false);
+      setUsersIncomplete(await GetUsersIncomplete());
+    };
+
     fetchUsers();
   }, []);
 
@@ -34,11 +38,32 @@ function Users() {
         </Button>
       </Title>
       <div>{creatingUser && <CreateUser updateUser={updateUser} />}</div>
+      <br />
 
-      <UserList users={users} />
+      <Content>
+        <button
+          type="button"
+          className={!listUsersIncomplete && 'selected'}
+          onClick={() => setListUsersIncomplete(false)}
+        >
+          Todos Usuarios
+        </button>
+        <button
+          type="button"
+          className={listUsersIncomplete && 'selected'}
+          onClick={() => setListUsersIncomplete(true)}
+        >
+          Usaurios incompleto
+        </button>
+      </Content>
 
-      <p>Usuarios com cadastro incompleto</p>
-      <UserList users={usersIncomplete} />
+      {loading && <Loading />}
+      {!loading &&
+        (listUsersIncomplete ? (
+          <UserList users={usersIncomplete} />
+        ) : (
+          <UserList users={users} />
+        ))}
     </>
   );
 }

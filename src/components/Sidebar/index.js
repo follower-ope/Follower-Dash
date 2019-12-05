@@ -1,15 +1,26 @@
 import React from 'react';
-import { FaHome, FaUser, FaProjectDiagram } from 'react-icons/fa';
+import {
+  FaHome,
+  FaUser,
+  FaProjectDiagram,
+  FaGlobe,
+  FaAddressCard,
+  FaExchangeAlt,
+} from 'react-icons/fa';
 import { MdExtension } from 'react-icons/md';
 
 import { NavLink } from 'react-router-dom';
 
 import { Container } from './styles';
 
+import icon from '../../assets/img/icon.svg';
+
 const Sidebar = () => (
   <Container>
     <header>
-      <span>Menu</span>
+      <span>
+        <img src={icon} alt="logo" />
+      </span>
     </header>
     <nav>
       <ul>
@@ -32,8 +43,8 @@ const Sidebar = () => (
         <li>
           <NavLink activeClassName="active" to="/profiles">
             <p>
-              <FaUser />
-              <span>Perfis de usuario</span>
+              <FaAddressCard />
+              <span>Perfis</span>
             </p>
           </NavLink>
         </li>
@@ -48,7 +59,7 @@ const Sidebar = () => (
         <li>
           <NavLink activeClassName="active" to="/activities">
             <p>
-              <MdExtension />
+              <FaExchangeAlt />
               <span>Entra/Saida</span>
             </p>
           </NavLink>
@@ -56,7 +67,7 @@ const Sidebar = () => (
         <li>
           <NavLink activeClassName="active" to="/softwares">
             <p>
-              <MdExtension />
+              <FaGlobe />
               <span>Softwares</span>
             </p>
           </NavLink>

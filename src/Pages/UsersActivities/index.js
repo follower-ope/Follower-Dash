@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { format, addHours, addDays } from 'date-fns';
+import Loading from '../../components/Loading';
 import { Table, Button } from '../../styles/components';
 import { Activities } from '../../services/UserService';
+import { Content } from './styles';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -27,19 +29,22 @@ function UsersActitivies() {
   return (
     <>
       <h1>Entrada e Saida </h1>
-      <Button type="button" onClick={() => changeDays(-1)}>
-        {'<'}
-      </Button>
-      <DatePicker
-        dateFormat="dd/MM/yyyy"
-        selected={date}
-        onChange={dt => setDate(dt)}
-      />
-      <Button type="button" onClick={() => changeDays(1)}>
-        {'>'}
-      </Button>
+      <Content>
+        <Button className="btn" type="button" onClick={() => changeDays(-1)}>
+          {'<'}
+        </Button>
+        <DatePicker
+          dateFormat="dd/MM/yyyy"
+          selected={date}
+          onChange={dt => setDate(dt)}
+        />
+        <Button className="btn" type="button" onClick={() => changeDays(1)}>
+          {'>'}
+        </Button>
+      </Content>
+
       {loading ? (
-        <h1>Carregando</h1>
+        <Loading />
       ) : (
         <Table>
           <thead>

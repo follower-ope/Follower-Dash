@@ -16,6 +16,17 @@ export const Container = styled.aside`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
+
+    span {
+      height: 100%;
+      width: 100%;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
   }
 
   nav {
@@ -30,8 +41,10 @@ export const Container = styled.aside`
     }
 
     p {
-      padding: 20px;
+      padding: 20px 9px;
       font-size: 18px;
+      display: flex;
+      align-items: center;
 
       svg {
         margin-right: 10px;

@@ -1,12 +1,20 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  width: 100%;
+  min-height: 50%;
+  font-size: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   svg {
     -webkit-animation: rotating 2s linear infinite;
     -moz-animation: rotating 2s linear infinite;
     -ms-animation: rotating 2s linear infinite;
     -o-animation: rotating 2s linear infinite;
     animation: rotating 2s linear infinite;
+    opacity: 0.7;
   }
 
   @keyframes rotating {

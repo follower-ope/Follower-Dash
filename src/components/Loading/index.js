@@ -5,9 +5,7 @@ import { Container } from './styles';
 function Loading() {
   return (
     <Container>
-      <h1>
-        Loading <FaSpinner />
-      </h1>
+      <FaSpinner />
     </Container>
   );
 }

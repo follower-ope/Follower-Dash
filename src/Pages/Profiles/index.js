@@ -3,15 +3,18 @@ import { Link } from 'react-router-dom';
 import { GetProfiles } from '../../services/ProfileService';
 import { Table, Button } from '../../styles/components';
 import { Title } from './styles';
+import Loading from '../../components/Loading';
 import CreateProfile from '../../components/CreateProfile';
 
 function Profiles() {
+  const [loading, setLoading] = useState(true);
   const [profiles, setProfiles] = useState([]);
   const [creatingProfile, setCreatingProfile] = useState(false);
 
   useEffect(() => {
     async function fetchProfiles() {
       setProfiles(await GetProfiles());
+      setLoading(false);
     }
     fetchProfiles();
   }, []);
@@ -36,22 +39,28 @@ function Profiles() {
         {creatingProfile && <CreateProfile updateProfile={updateProfile} />}
       </div>
 
-      <Table>
-        <thead>
-          <tr>
-            <th>Perfil</th>
-          </tr>
-        </thead>
-        <tbody>
-          {profiles.map(profile => (
-            <tr key={profile.description}>
-              <td>
-                <Link to={`/profile/${profile.id}`}>{profile.description}</Link>
-              </td>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Table>
+          <thead>
+            <tr>
+              <th>Perfil</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {profiles.map(profile => (
+              <tr key={profile.description}>
+                <td>
+                  <Link to={`/profile/${profile.id}`}>
+                    {profile.description}
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
     </>
   );
 }
