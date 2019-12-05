@@ -4,6 +4,8 @@ import { GetProjects } from '../../services/ProjectService';
 import { GetProfiles } from '../../services/ProfileService';
 import { GetSoftwares } from '../../services/SoftwaresService';
 import { Content, Card } from './style';
+import { ChartContent } from '../../styles/components';
+import Loading from '../../components/Loading';
 
 function Home({ history }) {
   const [qtdUsers, setQtdUsers] = useState({});
@@ -43,6 +45,18 @@ function Home({ history }) {
         <Card className="red" onClick={() => history.push('/softwares')}>
           <div>{qtdSoftwares} Softwares</div>
         </Card>
+      </Content>
+
+      <Content>
+        <ChartContent />
+        <ChartContent />
+        <ChartContent />
+      </Content>
+
+      <Content>
+        <ChartContent />
+        <ChartContent />
+        <ChartContent />
       </Content>
     </>
   );
