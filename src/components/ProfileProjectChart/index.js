@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
 import Chart from 'react-apexcharts';
+import { msToTime } from '../../services/HoursService';
 
 function ProfileProjectChart({ profiles }) {
   const [profilesList, setProfiles] = useState([]);
   const [profile, setProfile] = useState(null);
-  const [horas, setHoras] = useState({});
+  const [horas, setHoras] = useState([]);
   const [pieData, setPieData] = useState({});
 
   useEffect(() => {
@@ -18,43 +18,41 @@ function ProfileProjectChart({ profiles }) {
     if (profile || profilesList[0]) {
       const hrs = profiles[profile || profilesList[0]];
 
-      const hrsImprodutiva = moment.duration(hrs.horasImprodutivas).asMinutes();
-      const hrsProdutiva = moment.duration(hrs.horasProdutivas).asMinutes();
-      setHoras({
-        hrsImprodutiva,
-        hrsProdutiva,
-      });
+      const hrsImprodutiva = hrs.horasImprodutivas;
+      const hrsProdutiva = hrs.horasProdutivas;
 
-      setPieData({
-        options: {
-          labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
-          tooltip: {
-            y: {
-              formatter: seriesValue =>
-                moment()
-                  .startOf('day')
-                  .add(seriesValue, 'minutes')
-                  .format('hh:mm'),
-            },
-          },
-          responsive: [
-            {
-              breakpoint: 480,
-              options: {
-                chart: {
-                  width: 300,
-                },
-                legend: {
-                  position: 'bottom',
-                },
-              },
-            },
-          ],
-        },
-        series: [hrsProdutiva, hrsImprodutiva],
-      });
+      setHoras([hrsImprodutiva, hrsProdutiva]);
     }
   }, [profile, profilesList]);
+
+  useEffect(() => {
+    if (!horas.length) return;
+
+    setPieData({
+      options: {
+        labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
+        tooltip: {
+          y: {
+            formatter: seriesValue => msToTime(seriesValue),
+          },
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 300,
+              },
+              legend: {
+                position: 'bottom',
+              },
+            },
+          },
+        ],
+      },
+      series: [horas[0].value, horas[1].value],
+    });
+  }, [horas]);
 
   return (
     <>
@@ -67,7 +65,7 @@ function ProfileProjectChart({ profiles }) {
         ))}
       </select>
       <div>
-        {horas.hrsImprodutiva ? (
+        {horas.length ? (
           pieData.options && (
             <Chart
               options={pieData.options}

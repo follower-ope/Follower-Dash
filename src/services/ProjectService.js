@@ -23,7 +23,7 @@ export const GetProjectDetails = async projectId => {
       },
     });
 
-    const responseUsersProject = await api.get(`/projectUsers/${projectId}`, {
+    const responseUsersProject = await api.get(`/projects/${projectId}/users`, {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import Chart from 'react-apexcharts';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import { format, addHours } from 'date-fns';
+import { msToTime } from '../../services/HoursService';
 import Loading from '../Loading';
 import { ChartContent } from './styles';
 import { Productivity, Activities } from '../../services/UserService';
@@ -43,12 +43,7 @@ function UserProductivityChart({ username }) {
             labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
             tooltip: {
               y: {
-                formatter: seriesValue => {
-                  if (data.horasProdutivas.value === seriesValue) {
-                    return data.horasProdutivas.label;
-                  }
-                  return data.horasImprodutivas.label;
-                },
+                formatter: seriesValue => msToTime(seriesValue),
               },
             },
             responsive: [

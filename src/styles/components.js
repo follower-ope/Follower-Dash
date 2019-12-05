@@ -80,6 +80,7 @@ export const ChartContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 300px;
   box-shadow: 0 10px 20px rgba(125, 110, 252, 0.19),
     0 6px 6px rgba(125, 110, 252, 0.23);
   max-height: 400px;

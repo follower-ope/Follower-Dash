@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Chart from 'react-apexcharts';
 import Select from 'react-dropdown-select';
+import Loading from '../../components/Loading';
 import ProfileProjectChart from '../../components/ProfileProjectChart';
 import { GetUsers, ChangeUserProject } from '../../services/UserService';
 import { GetProjectDetails } from '../../services/ProjectService';
@@ -9,6 +10,7 @@ import { Container, Content, UsersContent } from './style';
 import { ChartContent, Button } from '../../styles/components';
 
 function ProjectDetails({ match }) {
+  const [loadingProject, setLoadingProject] = useState(true);
   const [project, setProject] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
   const [users, setUsers] = useState([]);
@@ -77,6 +79,7 @@ function ProjectDetails({ match }) {
     const fetchProjectDetails = async () => {
       const { id } = match.params;
       setProject(await GetProjectDetails(id));
+      setLoadingProject(false);
     };
     fetchProjectDetails();
   }, [match.params]);
@@ -139,8 +142,12 @@ function ProjectDetails({ match }) {
 
         <Container>
           <ChartContent>
-            {project.profiles && (
-              <ProfileProjectChart profiles={project.profiles} />
+            {loadingProject ? (
+              <Loading />
+            ) : (
+              project.profiles && (
+                <ProfileProjectChart profiles={project.profiles} />
+              )
             )}
           </ChartContent>
           <ChartContent>
