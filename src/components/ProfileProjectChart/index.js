@@ -7,10 +7,13 @@ function ProfileProjectChart({ profiles }) {
   const [profile, setProfile] = useState(null);
   const [horas, setHoras] = useState([]);
   const [pieData, setPieData] = useState({});
+  const [nonData, setNonData] = useState(false);
 
   useEffect(() => {
     if (Object.keys(profiles).length) {
       setProfiles(Object.keys(profiles));
+    } else {
+      setNonData(true);
     }
   }, []);
 
@@ -36,6 +39,7 @@ function ProfileProjectChart({ profiles }) {
             formatter: seriesValue => msToTime(seriesValue),
           },
         },
+        colors: ['rgba(42, 158, 251, .7)', 'rgba(173, 19, 19, .7)'],
         responsive: [
           {
             breakpoint: 480,
@@ -57,27 +61,33 @@ function ProfileProjectChart({ profiles }) {
   return (
     <>
       <h1>Perfil</h1>
-      <select name="profile" onChange={e => setProfile(e.target.value)}>
-        {profilesList.map(pr => (
-          <option key={pr} value={pr}>
-            {pr}
-          </option>
-        ))}
-      </select>
-      <div>
-        {horas.length ? (
-          pieData.options && (
-            <Chart
-              options={pieData.options}
-              series={pieData.series}
-              type="pie"
-              width="380"
-            />
-          )
-        ) : (
-          <p>nsajdsoah</p>
-        )}
-      </div>
+      {nonData ? (
+        <p>Nao ha dados para serem exibidos</p>
+      ) : (
+        <>
+          <select name="profile" onChange={e => setProfile(e.target.value)}>
+            {profilesList.map(pr => (
+              <option key={pr} value={pr}>
+                {pr}
+              </option>
+            ))}
+          </select>
+          <div>
+            {horas.length ? (
+              pieData.options && (
+                <Chart
+                  options={pieData.options}
+                  series={pieData.series}
+                  type="pie"
+                  width="380"
+                />
+              )
+            ) : (
+              <p>nsajdsoah</p>
+            )}
+          </div>
+        </>
+      )}
     </>
   );
 }

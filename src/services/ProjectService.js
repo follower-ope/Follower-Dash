@@ -38,10 +38,20 @@ export const GetProjectDetails = async projectId => {
       }
     );
 
+    const responseProductivity = await api.get(
+      `/projectProductivity/${projectId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
+
     const project = {
       ...responseProject.data,
       users: responseUsersProject.data,
       profiles: responseProfileProject.data.profiles,
+      productivity: responseProductivity.data,
     };
 
     return project;

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Chart from 'react-apexcharts';
 import Select from 'react-dropdown-select';
 import Loading from '../../components/Loading';
+import ProjectProductivity from '../../components/ProjectProductivity';
 import ProfileProjectChart from '../../components/ProfileProjectChart';
 import { GetUsers, ChangeUserProject } from '../../services/UserService';
 import { GetProjectDetails } from '../../services/ProjectService';
@@ -11,6 +12,7 @@ import { ChartContent, Button } from '../../styles/components';
 
 function ProjectDetails({ match }) {
   const [loadingProject, setLoadingProject] = useState(true);
+  const [loadingUsers, setLoadingUsers] = useState(true);
   const [project, setProject] = useState({});
   const [areaChartData, setAreaChartData] = useState({});
   const [users, setUsers] = useState([]);
@@ -29,6 +31,7 @@ function ProjectDetails({ match }) {
             return !userInProject;
           })
         );
+        setLoadingUsers(false);
       }
     };
     fetchUsers();
@@ -109,35 +112,39 @@ function ProjectDetails({ match }) {
     <>
       <h1>{project.title}</h1>
       <p>{project.description}</p>
-      <br />
-      <br />
-      <br />
+
       <Content>
         <UsersContent>
-          <h5>usuarios do projeto</h5>
-          <Select
-            options={users.map(u => {
-              return { label: u.username, value: u.username };
-            })}
-            onChange={values => addUser(values)}
-            placeholder="Selecione..."
-          />
-          <div>
-            <ul>
-              {project.users &&
-                project.users.map(user => (
-                  <li key={user.username}>
-                    {user.username}
-                    <Button
-                      type="button"
-                      onClick={() => handleRemoveUser(user.username)}
-                    >
-                      x
-                    </Button>
-                  </li>
-                ))}
-            </ul>
-          </div>
+          {loadingUsers ? (
+            <Loading />
+          ) : (
+            <>
+              <h5>Incluir usuario no projeto</h5>
+              <Select
+                options={users.map(u => {
+                  return { label: u.username, value: u.username };
+                })}
+                onChange={values => addUser(values)}
+                placeholder="Selecione..."
+              />
+              <div>
+                <ul>
+                  {project.users &&
+                    project.users.map(user => (
+                      <li key={user.username}>
+                        {user.username}
+                        <Button
+                          type="button"
+                          onClick={() => handleRemoveUser(user.username)}
+                        >
+                          x
+                        </Button>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </>
+          )}
         </UsersContent>
 
         <Container>
@@ -148,6 +155,11 @@ function ProjectDetails({ match }) {
               project.profiles && (
                 <ProfileProjectChart profiles={project.profiles} />
               )
+            )}
+          </ChartContent>
+          <ChartContent>
+            {project.productivity && (
+              <ProjectProductivity productivity={project.productivity} />
             )}
           </ChartContent>
           <ChartContent>
