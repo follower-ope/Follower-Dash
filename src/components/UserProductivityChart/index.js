@@ -76,30 +76,28 @@ function UserProductivityChart({ username }) {
         onChange={dt => setStartDate(dt)}
       />
 
-      {nonData && <p>sem dados</p>}
-      {loading && <Loading />}
-      {!loading && !nonData && (
-        <div>
-          <p>
-            Entrada:
-            {format(addHours(new Date(activities.entrada), 3), 'HH:mm:ss')}
-          </p>
-          <p>
-            saida: {format(addHours(new Date(activities.saida), 3), 'HH:mm:ss')}
-          </p>
-        </div>
-      )}
-
       <ChartContent>
         {loading && <Loading />}
-        {nonData && <p>sem dados para mostrar nesse periodo</p>}
+        {!loading && nonData && <p>sem dados para mostrar nesse periodo</p>}
         {!loading && !nonData && pieData.options && (
-          <Chart
-            options={pieData.options}
-            series={pieData.series}
-            type="pie"
-            width="380"
-          />
+          <>
+            <div>
+              <p>
+                <b>Entrada:</b>
+                {format(addHours(new Date(activities.entrada), 3), 'HH:mm:ss')}
+              </p>
+              <p>
+                <b>saida:</b>
+                {format(addHours(new Date(activities.saida), 3), 'HH:mm:ss')}
+              </p>
+            </div>
+            <Chart
+              options={pieData.options}
+              series={pieData.series}
+              type="pie"
+              width="380"
+            />
+          </>
         )}
       </ChartContent>
     </>
