@@ -76,11 +76,9 @@ function UserProductivityChart({ username }) {
         onChange={dt => setStartDate(dt)}
       />
 
-      {loading ? (
-        <Loading />
-      ) : nonData ? (
-        <p>sem dados</p>
-      ) : (
+      {nonData && <p>sem dados</p>}
+      {loading && <Loading />}
+      {!loading && !nonData && (
         <div>
           <p>
             Entrada:
@@ -93,19 +91,15 @@ function UserProductivityChart({ username }) {
       )}
 
       <ChartContent>
-        {loading ? (
-          <Loading />
-        ) : nonData ? (
-          <p>sem dados para mostrar nesse periodo</p>
-        ) : (
-          pieData.options && (
-            <Chart
-              options={pieData.options}
-              series={pieData.series}
-              type="pie"
-              width="380"
-            />
-          )
+        {loading && <Loading />}
+        {nonData && <p>sem dados para mostrar nesse periodo</p>}
+        {!loading && !nonData && pieData.options && (
+          <Chart
+            options={pieData.options}
+            series={pieData.series}
+            type="pie"
+            width="380"
+          />
         )}
       </ChartContent>
     </>

@@ -13,6 +13,7 @@ import Login from './Pages/Login';
 import Dasboards from './Pages/Dashboards';
 import ProjectDetails from './Pages/ProjectDetails';
 import Softwares from './Pages/Softwares';
+import SoftwareDetails from './Pages/SoftwaresDetails';
 import Profiles from './Pages/Profiles';
 import ProfileDetails from './Pages/ProfileDetails';
 import UsersActivities from './Pages/UsersActivities';
@@ -78,6 +79,12 @@ const Routes = () => {
             layout={DashLayout}
             component={Softwares}
           />
+          <PrivateRoute
+            path="/software/:processName"
+            layout={DashLayout}
+            component={SoftwareDetails}
+          />
+
           <PrivateRoute
             path="/Dashboards"
             layout={DashLayout}
