@@ -5,7 +5,7 @@ import { GetProfiles } from '../../services/ProfileService';
 import { GetSoftwares } from '../../services/SoftwaresService';
 import { Content, Card } from './style';
 import { ChartContent } from '../../styles/components';
-import Loading from '../../components/Loading';
+import ProjectChart from '../../components/ProjectChart';
 
 function Home({ history }) {
   const [qtdUsers, setQtdUsers] = useState({});
@@ -48,9 +48,9 @@ function Home({ history }) {
       </Content>
 
       <Content>
-        <ChartContent />
-        <ChartContent />
-        <ChartContent />
+        <ProjectChart projectId={1} />
+        <ProjectChart projectId={2} />
+        <ProjectChart projectId={3} />
       </Content>
 
       <Content>
