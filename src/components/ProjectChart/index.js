@@ -19,12 +19,15 @@ function ProjectChart({ projectId }) {
   useEffect(() => {
     if (!Object.keys(project).length) return;
 
-    console.log(project);
-    const productivity = project.productivity;
+    const { productivity } = project;
 
     setPieData({
       options: {
-        labels: ['Horas restantes', 'Horas Produtiva', 'Horas Improdutivas'],
+        labels: [
+          // 'Horas restantes',
+          'Horas Produtiva',
+          'Horas Improdutivas',
+        ],
         // tooltip: {
         //   y: {
         //     formatter: seriesValue => msToTime(seriesValue),
@@ -50,14 +53,9 @@ function ProjectChart({ projectId }) {
         ],
       },
       series: [
-        // productivity.totalHoursSpent.value -
-        //   (productivity.productiveHours.value +
-        //     productivity.productiveHours.value),
-        // productivity.productiveHours.value,
-        // productivity.unproductiveHours.value,
-        Math.random(),
-        Math.random(),
-        Math.random(),
+        // productivity.duration * 36000 - productivity.totalHoursSpent.value,
+        productivity.productiveHours.value,
+        productivity.unproductiveHours.value,
       ],
     });
   }, [project]);
