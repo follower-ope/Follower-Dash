@@ -11,7 +11,7 @@ function ProjectProductivity({ productivity }) {
 
     setPieData({
       options: {
-        labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
+        labels: ['Horas Produtiva', 'Horas Improdutivas'],
         tooltip: {
           y: {
             formatter: seriesValue => {

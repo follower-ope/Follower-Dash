@@ -33,7 +33,7 @@ function ProfileProjectChart({ profiles }) {
 
     setPieData({
       options: {
-        labels: ['Hrs Produtiva', 'Hrs Improdutivas'],
+        labels: ['Horas Produtiva', 'Horas Improdutivas'],
         tooltip: {
           y: {
             formatter: seriesValue => msToTime(seriesValue),

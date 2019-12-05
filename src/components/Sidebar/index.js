@@ -60,7 +60,7 @@ const Sidebar = () => (
           <NavLink activeClassName="active" to="/activities">
             <p>
               <FaExchangeAlt />
-              <span>Entra/Saida</span>
+              <span>Entrada/Saída</span>
             </p>
           </NavLink>
         </li>

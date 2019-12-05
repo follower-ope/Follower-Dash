@@ -69,11 +69,11 @@ function ProjectDetails({ match }) {
       },
       series: [
         {
-          name: 'Hrs Produtiva',
+          name: 'Horas Produtiva',
           data: [31, 40, 28, 51, 42, 109, 100],
         },
         {
-          name: 'hrs Improdutiva',
+          name: 'Horas Improdutiva',
           data: [11, 32, 45, 32, 34, 52, 41],
         },
       ],

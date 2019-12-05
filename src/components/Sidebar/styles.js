@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.aside`
-  width: 150px;
-  min-width: 150px;
+  width: 170px;
+  min-width: 170px;
   background: #5d4afbcc;
   transition: width 0.5s;
 

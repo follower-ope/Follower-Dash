@@ -46,7 +46,7 @@ function CreateProject({ updateProject }) {
       <label htmlFor="timeproject">
         <input
           type="text"
-          placeholder="Tempo do projeto (Hrs)"
+          placeholder="Tempo do projeto (Horas)"
           value={project.time}
           onChange={e => handleChange({ time: e.target.value })}
         />

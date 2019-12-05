@@ -48,15 +48,27 @@ function Home({ history }) {
       </Content>
 
       <Content>
-        <ProjectChart projectId={1} />
-        <ProjectChart projectId={2} />
-        <ProjectChart projectId={3} />
+        <ChartContent>
+          <ProjectChart projectId={1} />
+        </ChartContent>
+        <ChartContent>
+          <ProjectChart projectId={2} />
+        </ChartContent>
+        <ChartContent>
+          <ProjectChart projectId={3} />
+        </ChartContent>
       </Content>
 
       <Content>
-        <ChartContent />
-        <ChartContent />
-        <ChartContent />
+        <ChartContent>
+          <ProjectChart projectId={4} />
+        </ChartContent>
+        <ChartContent>
+          <ProjectChart projectId={5} />
+        </ChartContent>
+        <ChartContent>
+          <ProjectChart projectId={6} />
+        </ChartContent>
       </Content>
     </>
   );

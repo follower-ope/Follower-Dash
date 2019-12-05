@@ -53,7 +53,7 @@ function Users() {
           className={listUsersIncomplete && 'selected'}
           onClick={() => setListUsersIncomplete(true)}
         >
-          Usaurios incompleto
+          Usuarios incompleto
         </button>
       </Content>
 
