@@ -23,7 +23,7 @@ function Profiles() {
   return (
     <>
       <Title>
-        <h1>Perfils</h1>
+        <h1>Perfis</h1>
         <Button
           type="button"
           onClick={() => setCreatingProfile(!creatingProfile)}

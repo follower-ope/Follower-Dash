@@ -33,7 +33,7 @@ const Sidebar = () => (
           <NavLink activeClassName="active" to="/profiles">
             <p>
               <FaUser />
-              <span>Perfils de usuario</span>
+              <span>Perfis de usuario</span>
             </p>
           </NavLink>
         </li>
