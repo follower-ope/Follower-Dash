@@ -11,10 +11,27 @@ export const Card = styled.div`
   margin: 20px;
   flex: 1;
 
+  &.blue {
+    background: #242498;
+  }
+
+  &.green {
+    background: #1ba71b;
+  }
+
+  &.red {
+    background: #cc2020;
+  }
+
+  &.orange {
+    background: #ec9f10;
+  }
+
   div {
     width: 100%;
     height: 20%;
     padding: 20px;
     text-align: center;
+    color: #fff;
   }
 `;

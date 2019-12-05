@@ -21,16 +21,16 @@ function Home() {
   return (
     <>
       <Content>
-        <Card>
+        <Card className="blue">
           <div>{qtdUsers.total} Usuarios</div>
         </Card>
-        <Card>
+        <Card className="green">
           <div>{qtdProjects} Projetos</div>
         </Card>
-        <Card>
+        <Card className="orange">
           <div>{qtdProjects} Projetos</div>
         </Card>
-        <Card>
+        <Card className="red">
           <div>{qtdProjects} Projetos</div>
         </Card>
       </Content>
