@@ -3,16 +3,16 @@ import { errorMessage, successMessage } from './Messages';
 
 export const SaveProfile = async profile => {
   try {
-    await api.post(`/profile`, profile, {
+    const response = await api.post(`/profile`, profile, {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem('token')}`,
       },
     });
     successMessage('Perfil criado com sucesso');
-    return true;
+    return response.data;
   } catch ({ response }) {
     errorMessage(response ? response.data.error : 'Ocorreu um erro');
-    return false;
+    return null;
   }
 };
 

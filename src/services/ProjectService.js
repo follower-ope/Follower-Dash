@@ -92,6 +92,20 @@ export const GetProductivityByDate = async (projectId, startDate, endDate) => {
     );
     return response.data;
   } catch ({ response }) {
-    console.log(response);
+    errorMessage('Ocorreu um erro');
+  }
+};
+
+export const GetProjectsProductivity = async () => {
+  try {
+    const response = await api.get(`/projectProductivity`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+
+    return response.data;
+  } catch ({ response }) {
+    errorMessage('Ocorreu um erro');
   }
 };

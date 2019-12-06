@@ -25,7 +25,7 @@ function ProjectChart({ projectId }) {
       options: {
         labels: [
           // 'Horas restantes',
-          'Horas Produtiva',
+          'Horas Produtivas',
           'Horas Improdutivas',
         ],
         // tooltip: {

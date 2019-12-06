@@ -10,12 +10,12 @@ function CreateProfile({ updateProfile }) {
     setProfile({ ...profile, ...obj });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const nProfile = SaveProfile(profile);
+    const nProfile = await SaveProfile(profile);
 
     if (nProfile) {
-      updateProfile(profile);
+      updateProfile(nProfile);
       setProfile({ description: '' });
     }
   };

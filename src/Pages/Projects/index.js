@@ -33,7 +33,7 @@ function Projects() {
           type="button"
           onClick={() => setcreatingProject(!creatingProject)}
         >
-          Novo Projeto
+          {creatingProject ? 'Cancelar' : 'Novo Projeto'}
         </Button>
       </Title>
 

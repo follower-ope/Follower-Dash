@@ -34,7 +34,7 @@ function Users() {
       <Title>
         <h1>Usuarios</h1>
         <Button type="button" onClick={() => setCreatingUser(!creatingUser)}>
-          Novo Usuario
+          {creatingUser ? 'Cancelar' : 'Novo Usuario'}
         </Button>
       </Title>
       <div>{creatingUser && <CreateUser updateUser={updateUser} />}</div>

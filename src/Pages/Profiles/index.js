@@ -31,7 +31,7 @@ function Profiles() {
           type="button"
           onClick={() => setCreatingProfile(!creatingProfile)}
         >
-          Novo Perfil
+          {creatingProfile ? 'Cancelar' : 'Novo Perfil'}
         </Button>
       </Title>
 
