@@ -16,7 +16,7 @@ function CreateProject({ updateProject }) {
     const nProject = await SaveProject(project);
 
     if (nProject) {
-      updateProject(project);
+      updateProject(nProject);
       setProject({ title: '', description: '', time: '' });
     }
   };

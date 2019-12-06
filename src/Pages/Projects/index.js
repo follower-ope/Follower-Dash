@@ -21,6 +21,7 @@ function Projects() {
   }, []);
 
   const updateProject = project => {
+    console.log([...projects, project])
     setProjects([...projects, project]);
     setcreatingProject(false);
   };
