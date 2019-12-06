@@ -2,22 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import { Link } from 'react-router-dom';
 import { msToTime } from '../../services/HoursService';
-import { GetProjectDetails } from '../../services/ProjectService';
-import { Container, TextLoading } from './styles';
+import { Container } from './styles';
 
 function ProjectChart({ project }) {
-  const [loading, setLoading] = useState(true);
-  const [projectDetail, setProjectDetail] = useState({});
   const [pieData, setPieData] = useState({});
-
-  useEffect(() => {
-    const fetchProject = async () => {
-      const { title, description } = await GetProjectDetails(project.id);
-      setProjectDetail({ title, description });
-      setLoading(false);
-    };
-    fetchProject();
-  }, []);
 
   useEffect(() => {
     const hrsRestante = project.duracao.value;
@@ -79,24 +67,12 @@ function ProjectChart({ project }) {
   return (
     <>
       <Container>
-        {loading ? (
-          <>
-            <TextLoading>
-              <h1>carregando</h1>
-            </TextLoading>
-            <TextLoading>
-              <p>carregando</p>
-            </TextLoading>
-          </>
-        ) : (
-          <div>
-            <h1>
-              <Link to={`/projeto/${project.id}`}>{projectDetail.title}</Link>
-            </h1>
-            <p>{projectDetail.description}</p>
-          </div>
-        )}
-
+        <div>
+          <h1>
+            <Link to={`/projeto/${project.id}`}>{project.titulo}</Link>
+          </h1>
+          <p>{project.descricao}</p>
+        </div>
         <div>
           {pieData.options && (
             <Chart

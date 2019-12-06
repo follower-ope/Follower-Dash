@@ -13,8 +13,8 @@ export const Content = styled.div`
     margin: 20px;
     background: white;
     border: 0;
-    padding: 7px 12px;
-    font-size: 20px;
+    padding: 7px 8px;
+    font-size: 16px;
     display: flex;
     border-radius: 5px;
     color: #7b6cfa;
