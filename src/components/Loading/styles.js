@@ -14,7 +14,7 @@ export const Container = styled.div`
     -ms-animation: rotating 2s linear infinite;
     -o-animation: rotating 2s linear infinite;
     animation: rotating 2s linear infinite;
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   @keyframes rotating {

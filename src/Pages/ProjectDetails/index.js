@@ -7,7 +7,13 @@ import ProjectProductivityByDay from '../../components/ProjectProductivityByDay'
 import ProfileProjectChart from '../../components/ProfileProjectChart';
 import { GetUsers, ChangeUserProject } from '../../services/UserService';
 import { GetProjectDetails } from '../../services/ProjectService';
-import { Container, Content } from './style';
+import {
+  Container,
+  Content,
+  PieChartLoading,
+  TextLoading,
+  TableLoading,
+} from './style';
 import { Table, ChartContent, Button } from '../../styles/components';
 import { errorMessage } from '../../services/Messages';
 
@@ -23,7 +29,6 @@ function ProjectDetails({ match }) {
       const user = await GetUsers();
 
       if (project.users) {
-        console.log(project);
         setUsers(
           user.filter(value => {
             const userInProject = project.users.find(element => {
@@ -76,8 +81,22 @@ function ProjectDetails({ match }) {
 
   return (
     <>
-      <h1>{project.title}</h1>
-      <p>{project.description}</p>
+      {loadingProject ? (
+        <>
+          <TextLoading>
+            <h1>carregando</h1>
+          </TextLoading>
+          <TextLoading>
+            <p>carregando</p>
+          </TextLoading>
+        </>
+      ) : (
+        <>
+          <h1>{project.title}</h1>
+          <p>{project.description}</p>
+        </>
+      )}
+
       {/* <ButtonsContent>
         <button
           type="button"
@@ -98,7 +117,7 @@ function ProjectDetails({ match }) {
       <Container>
         <ChartContent>
           {loadingProject ? (
-            <Loading />
+            <PieChartLoading />
           ) : (
             project.profiles && (
               <ProfileProjectChart profiles={project.profiles} />
@@ -107,7 +126,7 @@ function ProjectDetails({ match }) {
         </ChartContent>
         <ChartContent>
           {loadingProject ? (
-            <Loading />
+            <PieChartLoading />
           ) : (
             project.productivity && (
               <ProjectProductivity productivity={project.productivity} />
@@ -118,13 +137,22 @@ function ProjectDetails({ match }) {
 
       <Container>
         <ChartContent className="full">
-          {project.id && <ProjectProductivityByDay projectId={project.id} />}
+          {project.id ? (
+            <ProjectProductivityByDay projectId={project.id} />
+          ) : (
+            <Loading />
+          )}
         </ChartContent>
       </Container>
 
       <Content className="marginTop">
         {loadingUsers ? (
-          <Loading />
+          <TableLoading>
+            <div className="line" />
+            <div className="line" />
+            <div className="line" />
+            <div className="line" />
+          </TableLoading>
         ) : (
           <>
             <div>

@@ -102,13 +102,13 @@ function ProjectProductivityByDay({ projectId }) {
 
   return (
     <>
-      {areaChartData.options && (
-        <Content>
-          {loading ? (
-            <LoadContainer>
-              <Loading />
-            </LoadContainer>
-          ) : (
+      <Content>
+        {loading ? (
+          <LoadContainer>
+            <Loading />
+          </LoadContainer>
+        ) : (
+          areaChartData.options && (
             <div>
               <DateTimeContainer>
                 De:
@@ -132,9 +132,9 @@ function ProjectProductivityByDay({ projectId }) {
                 height="280"
               />
             </div>
-          )}
-        </Content>
-      )}
+          )
+        )}
+      </Content>
     </>
   );
 }

@@ -63,6 +63,24 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-around;
   flex: 6;
+
+  @keyframes wave {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
+
+  @-webkit-keyframes wave {
+    0% {
+      background-position: -468px 0;
+    }
+    100% {
+      background-position: 468px 0;
+    }
+  }
 `;
 
 export const Form = styled.form`
@@ -81,5 +99,63 @@ export const Form = styled.form`
     border: 1px solid #7b6cfa;
     margin-top: 4px;
     padding: 3px;
+  }
+`;
+
+export const PieChartLoading = styled.div`
+  width: 200px;
+  height: 200px;
+  margin: 31px;
+  border-radius: 50%;
+  color: transparent;
+
+  h1 {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
+
+  animation: wave 1s infinite linear forwards;
+  -webkit-animation: wave 1s infinite linear forwards;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+`;
+
+export const TextLoading = styled.div`
+  width: 14%;
+  color: transparent;
+
+  h1 {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+
+    margin-bottom: 15px;
+  }
+
+  animation: wave 1s infinite linear forwards;
+  -webkit-animation: wave 1s infinite linear forwards;
+  background: #f6f7f8;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+`;
+
+export const TableLoading = styled.div`
+  width: 100%;
+  color: transparent;
+
+  div.line {
+    width: 100%;
+    height: 15px;
+    margin-bottom: 10px;
+
+    animation: wave 1s infinite linear forwards;
+    -webkit-animation: wave 1s infinite linear forwards;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #e2e2e2 18%, #eeeeee 33%);
+    background-size: 800px 104px;
   }
 `;
