@@ -43,11 +43,7 @@ function Profiles() {
         <Loading />
       ) : (
         <Table>
-          <thead>
-            <tr>
-              <th>Perfil</th>
-            </tr>
-          </thead>
+          <thead />
           <tbody>
             {profiles.map(profile => (
               <tr key={profile.description}>
