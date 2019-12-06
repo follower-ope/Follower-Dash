@@ -13,6 +13,7 @@ import {
   PieChartLoading,
   TextLoading,
   TableLoading,
+  LoadingContainer,
 } from './style';
 import { Table, ChartContent, Button } from '../../styles/components';
 import { errorMessage } from '../../services/Messages';
@@ -140,7 +141,9 @@ function ProjectDetails({ match }) {
           {project.id ? (
             <ProjectProductivityByDay projectId={project.id} />
           ) : (
-            <Loading />
+            <LoadingContainer>
+              <Loading />
+            </LoadingContainer>
           )}
         </ChartContent>
       </Container>

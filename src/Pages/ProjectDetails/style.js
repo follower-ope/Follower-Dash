@@ -159,3 +159,13 @@ export const TableLoading = styled.div`
     background-size: 800px 104px;
   }
 `;
+
+export const LoadingContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  svg {
+    font-size: 40px;
+  }
+`;

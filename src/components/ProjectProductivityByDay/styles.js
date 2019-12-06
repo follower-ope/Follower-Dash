@@ -15,6 +15,9 @@ export const LoadContainer = styled.div`
   right: 0;
   display: flex;
   background: rgba(255, 255, 255, 0.8);
+  svg {
+    font-size: 40px;
+  }
 `;
 
 export const DateTimeContainer = styled.div`
