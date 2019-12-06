@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { FaSignOutAlt } from 'react-icons/fa';
 import { Content } from './style';
 
 function NavMenu() {
@@ -17,9 +17,9 @@ function NavMenu() {
 
   return (
     <Content>
-      <p>Bem vindo {name}</p>
+      <p>Bem vindo, {name}</p>
       <button type="button" onClick={() => handleLoggout()}>
-        Sair
+        <FaSignOutAlt />
       </button>
     </Content>
   );
