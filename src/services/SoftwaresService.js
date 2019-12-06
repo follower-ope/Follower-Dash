@@ -14,3 +14,18 @@ export const GetSoftwares = async () => {
     return [];
   }
 };
+
+export const GetProfilesSoftware = async softwareId => {
+  try {
+    const response = await api.get(`/softwares/${softwareId}/profiles`, {
+      headers: {
+        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      },
+    });
+
+    return response.data;
+  } catch (err) {
+    errorMessage('Ocorreu um erro');
+    return null;
+  }
+};
