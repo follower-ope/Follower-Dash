@@ -5,7 +5,6 @@ function ProjectProductivity({ productivity }) {
   const [pieData, setPieData] = useState({});
 
   useEffect(() => {
-    console.log(productivity);
     const produtivas = productivity.productiveHours;
     const improdutivas = productivity.unproductiveHours;
 
@@ -48,6 +47,7 @@ function ProjectProductivity({ productivity }) {
       {pieData.options && (
         <>
           <p>Total de horas gastas: {productivity.totalHoursSpent.label}</p>
+
           <Chart
             options={pieData.options}
             series={pieData.series}

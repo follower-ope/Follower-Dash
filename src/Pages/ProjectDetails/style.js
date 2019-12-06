@@ -10,6 +10,35 @@ export const Content = styled.div`
       margin-left: 5px;
     }
   }
+
+  div.react-dropdown-select {
+    background: #fff !important;
+  }
+
+  button {
+    margin: 0 10px;
+  }
+`;
+
+export const ButtonsContent = styled.div`
+  width: 100%;
+  display: flex;
+  margin: 10px 0;
+
+  button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    padding: 18px;
+    border: 0;
+    cursor: pointer;
+
+    &.selected {
+      color: #fff;
+      background: #7b6cfa;
+    }
+  }
 `;
 
 export const UsersContent = styled.div`
@@ -30,4 +59,23 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-around;
   flex: 6;
+`;
+
+export const Form = styled.form`
+  margin: 10px 0;
+  display: flex;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+  }
+
+  input,
+  select {
+    border-radius: 2px;
+    border: 1px solid #7b6cfa;
+    margin-top: 4px;
+    padding: 3px;
+  }
 `;

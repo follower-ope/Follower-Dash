@@ -75,3 +75,23 @@ export const SaveProject = async project => {
     return null;
   }
 };
+
+export const GetProductivityByDate = async (projectId, startDate, endDate) => {
+  try {
+    const response = await api.post(
+      `/projectProductivityByDay/${projectId}`,
+      {
+        startDate,
+        endDate,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+        },
+      }
+    );
+    return response.data;
+  } catch ({ response }) {
+    console.log(response);
+  }
+};

@@ -62,7 +62,9 @@ function ProfileProjectChart({ profiles }) {
     <>
       <h1>Perfil</h1>
       {nonData ? (
-        <p>Nao ha dados para serem exibidos</p>
+        <div>
+          <p>Nao ha dados para serem exibidos</p>
+        </div>
       ) : (
         <>
           <select name="profile" onChange={e => setProfile(e.target.value)}>
