@@ -98,8 +98,4 @@ export const ChartContent = styled.div`
   h1 {
     margin: 5px;
   }
-
-  div {
-    margin: auto 0;
-  }
 `;

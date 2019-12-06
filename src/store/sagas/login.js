@@ -14,7 +14,14 @@ export function* login(data) {
     });
 
     if (response.status === 200) {
+      console.log(response.data);
       window.localStorage.setItem('token', response.data.token);
+      window.localStorage.setItem(
+        'name',
+        response.data.user.name
+          ? response.data.user.name
+          : response.data.user.username
+      );
       yield put(LoginActions.loginSuccess(true));
       window.location = '/home';
     }

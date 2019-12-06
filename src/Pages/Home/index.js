@@ -4,6 +4,7 @@ import {
   GetProjects,
   GetProjectsProductivity,
 } from '../../services/ProjectService';
+import Loading from '../../components/Loading';
 import { GetProfiles } from '../../services/ProfileService';
 import { GetSoftwares } from '../../services/SoftwaresService';
 import { Content, Card } from './style';
@@ -16,6 +17,7 @@ function Home({ history }) {
   const [qtdProfiles, setQtdProfiles] = useState(0);
   const [qtdSoftwares, setQtdSoftwares] = useState(0);
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -27,6 +29,7 @@ function Home({ history }) {
       setQtdSoftwares((await GetSoftwares()).length);
 
       setProjects(await GetProjectsProductivity());
+      setLoading(false);
     }
     fetchData();
   }, []);
@@ -49,6 +52,7 @@ function Home({ history }) {
       </Content>
 
       <Content>
+        {loading && <Loading />}
         {projects.map(project => {
           return (
             <ChartContent>

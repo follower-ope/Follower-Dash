@@ -3,7 +3,7 @@ import Chart from 'react-apexcharts';
 import { Link } from 'react-router-dom';
 import { msToTime } from '../../services/HoursService';
 import { GetProjectDetails } from '../../services/ProjectService';
-import { Container } from './styles';
+import { Container, TextLoading } from './styles';
 
 function ProjectChart({ project }) {
   const [loading, setLoading] = useState(true);
@@ -76,15 +76,27 @@ function ProjectChart({ project }) {
     });
   }, [project]);
 
-  return loading ? (
-    <p>carregando</p>
-  ) : (
+  return (
     <>
       <Container>
-        <h1>
-          <Link to={`/projeto/${project.id}`}>{projectDetail.title}</Link>
-        </h1>
-        <p>{projectDetail.description}</p>
+        {loading ? (
+          <>
+            <TextLoading>
+              <h1>carregando</h1>
+            </TextLoading>
+            <TextLoading>
+              <p>carregando</p>
+            </TextLoading>
+          </>
+        ) : (
+          <div>
+            <h1>
+              <Link to={`/projeto/${project.id}`}>{projectDetail.title}</Link>
+            </h1>
+            <p>{projectDetail.description}</p>
+          </div>
+        )}
+
         <div>
           {pieData.options && (
             <Chart
