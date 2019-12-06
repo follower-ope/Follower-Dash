@@ -1,42 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import { Link } from 'react-router-dom';
+import { msToTime } from '../../services/HoursService';
 import { GetProjectDetails } from '../../services/ProjectService';
 import { Container } from './styles';
 
-function ProjectChart({ projectId }) {
+function ProjectChart({ project }) {
   const [loading, setLoading] = useState(true);
-  const [project, setProject] = useState({});
+  const [projectDetail, setProjectDetail] = useState({});
   const [pieData, setPieData] = useState({});
 
   useEffect(() => {
     const fetchProject = async () => {
-      setProject(await GetProjectDetails(projectId));
+      const { title, description } = await GetProjectDetails(project.id);
+      setProjectDetail({ title, description });
       setLoading(false);
     };
     fetchProject();
   }, []);
 
   useEffect(() => {
-    if (!Object.keys(project).length) return;
-
-    const { productivity } = project;
+    const hrsRestante = project.duracao.value;
+    const param = {
+      label: '',
+      value: 0,
+    };
+    if (
+      project.horasImprodutivas.value + project.horasProdutivas.value >
+      hrsRestante
+    ) {
+      param.label = 'Horas Ultrapassadas';
+      param.value =
+        project.horasImprodutivas.value +
+        project.horasProdutivas.value -
+        hrsRestante;
+    } else {
+      param.label = 'Horas Restantes';
+      param.value =
+        hrsRestante -
+        (project.horasImprodutivas.value + project.horasProdutivas.value);
+    }
 
     setPieData({
       options: {
-        labels: [
-          // 'Horas restantes',
-          'Horas Produtivas',
-          'Horas Improdutivas',
-        ],
-        // tooltip: {
-        //   y: {
-        //     formatter: seriesValue => msToTime(seriesValue),
-        //   },
-        // },
+        labels: [param.label, 'Horas Produtivas', 'Horas Improdutivas'],
+        tooltip: {
+          y: {
+            formatter: seriesValue => msToTime(seriesValue),
+          },
+        },
         colors: [
-          'rgba(42, 158, 251, .7)',
-          'rgba(24, 236, 24, .7)',
-          'rgba(173, 19, 19, .7)',
+          '#4646dc',
+          'rgba(0, 227, 150, 0.85)',
+          'rgba(173, 19, 19, .85)',
         ],
         responsive: [
           {
@@ -53,9 +69,9 @@ function ProjectChart({ projectId }) {
         ],
       },
       series: [
-        // productivity.duration * 36000 - productivity.totalHoursSpent.value,
-        productivity.productiveHours.value,
-        productivity.unproductiveHours.value,
+        param.value,
+        project.horasProdutivas.value,
+        project.horasImprodutivas.value,
       ],
     });
   }, [project]);
@@ -65,8 +81,10 @@ function ProjectChart({ projectId }) {
   ) : (
     <>
       <Container>
-        <h1>{project.title}</h1>
-        <p>{project.description}</p>
+        <h1>
+          <Link to={`/projeto/${project.id}`}>{projectDetail.title}</Link>
+        </h1>
+        <p>{projectDetail.description}</p>
         <div>
           {pieData.options && (
             <Chart

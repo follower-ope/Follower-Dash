@@ -104,7 +104,12 @@ export const GetProjectsProductivity = async () => {
       },
     });
 
-    return response.data;
+    return Object.keys(response.data).map(l => {
+      return {
+        id: l,
+        ...response.data[l],
+      };
+    });
   } catch ({ response }) {
     errorMessage('Ocorreu um erro');
   }

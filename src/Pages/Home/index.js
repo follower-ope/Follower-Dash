@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { GetUsers, GetUsersIncomplete } from '../../services/UserService';
-import { GetProjects } from '../../services/ProjectService';
+import {
+  GetProjects,
+  GetProjectsProductivity,
+} from '../../services/ProjectService';
 import { GetProfiles } from '../../services/ProfileService';
 import { GetSoftwares } from '../../services/SoftwaresService';
 import { Content, Card } from './style';
@@ -12,20 +15,18 @@ function Home({ history }) {
   const [qtdProjects, setQtdProject] = useState(0);
   const [qtdProfiles, setQtdProfiles] = useState(0);
   const [qtdSoftwares, setQtdSoftwares] = useState(0);
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const users = [...(await GetUsers()), ...(await GetUsersIncomplete())];
       setQtdUsers({ total: users.length });
 
-      const projects = await GetProjects();
-      setQtdProject(projects.length);
+      setQtdProject((await GetProjects()).length);
+      setQtdProfiles((await GetProfiles()).length);
+      setQtdSoftwares((await GetSoftwares()).length);
 
-      const profiles = await GetProfiles();
-      setQtdProfiles(profiles.length);
-
-      const softwares = await GetSoftwares();
-      setQtdSoftwares(softwares.length);
+      setProjects(await GetProjectsProductivity());
     }
     fetchData();
   }, []);
@@ -48,27 +49,13 @@ function Home({ history }) {
       </Content>
 
       <Content>
-        <ChartContent>
-          <ProjectChart projectId={1} />
-        </ChartContent>
-        <ChartContent>
-          <ProjectChart projectId={2} />
-        </ChartContent>
-        <ChartContent>
-          <ProjectChart projectId={3} />
-        </ChartContent>
-      </Content>
-
-      <Content>
-        <ChartContent>
-          <ProjectChart projectId={4} />
-        </ChartContent>
-        <ChartContent>
-          <ProjectChart projectId={5} />
-        </ChartContent>
-        <ChartContent>
-          <ProjectChart projectId={6} />
-        </ChartContent>
+        {projects.map(project => {
+          return (
+            <ChartContent>
+              <ProjectChart project={project} />
+            </ChartContent>
+          );
+        })}
       </Content>
     </>
   );

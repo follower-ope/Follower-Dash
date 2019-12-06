@@ -4,6 +4,7 @@ export const Content = styled.div`
   flex: 1;
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 `;
 
 export const Card = styled.div`
