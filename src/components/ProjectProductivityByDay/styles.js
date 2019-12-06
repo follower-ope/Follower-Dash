@@ -16,3 +16,16 @@ export const LoadContainer = styled.div`
   display: flex;
   background: rgba(255, 255, 255, 0.8);
 `;
+
+export const DateTimeContainer = styled.div`
+  padding-left: 20px;
+  div {
+    margin-top: 2px;
+    margin-right: 3px;
+  }
+
+  input {
+    cursor: pointer;
+    width: 100px;
+  }
+`;

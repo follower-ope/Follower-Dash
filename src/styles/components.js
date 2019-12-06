@@ -86,7 +86,14 @@ export const ChartContent = styled.div`
   max-height: 400px;
   background: #fff;
   border-radius: 8px;
-  margin: 15px;
+  /* margin: 15px; */
+  margin: 6px;
+
+  &.full {
+    width: 100%;
+    height: 300px;
+    margin: 15px 0;
+  }
 
   h1 {
     margin: 5px;

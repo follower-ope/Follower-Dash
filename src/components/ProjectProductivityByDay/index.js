@@ -3,7 +3,7 @@ import Chart from 'react-apexcharts';
 import DatePicker from 'react-datepicker';
 import { addDays, getDate, format } from 'date-fns';
 import { GetProductivityByDate } from '../../services/ProjectService';
-import { LoadContainer, Content } from './styles';
+import { LoadContainer, Content, DateTimeContainer } from './styles';
 import { msToTime } from '../../services/HoursService';
 import Loading from '../Loading';
 
@@ -64,8 +64,17 @@ function ProjectProductivityByDay({ projectId }) {
         dataLabels: {
           enabled: false,
         },
+        colors: ['rgb(0, 227, 150)', 'rgb(173, 19, 19)'],
+        fill: {
+          colors: ['#26e7a6', '#F44336'],
+        },
         stroke: {
           curve: 'smooth',
+        },
+        yaxis: {
+          labels: {
+            formatter: seriesValue => msToTime(seriesValue),
+          },
         },
         xaxis: {
           type: 'date',
@@ -101,21 +110,26 @@ function ProjectProductivityByDay({ projectId }) {
             </LoadContainer>
           ) : (
             <div>
-              <DatePicker
-                dateFormat="dd/MM/yyyy"
-                selected={dates.startDate}
-                onChange={dt => setDate({ ...dates, startDate: dt })}
-              />
-              <DatePicker
-                dateFormat="dd/MM/yyyy"
-                selected={dates.endDate}
-                onChange={dt => setDate({ ...dates, endDate: dt })}
-              />
+              <DateTimeContainer>
+                De:
+                <DatePicker
+                  dateFormat="dd/MM/yyyy"
+                  selected={dates.startDate}
+                  onChange={dt => setDate({ ...dates, startDate: dt })}
+                />
+                Até:
+                <DatePicker
+                  dateFormat="dd/MM/yyyy"
+                  selected={dates.endDate}
+                  onChange={dt => setDate({ ...dates, endDate: dt })}
+                />
+              </DateTimeContainer>
+
               <Chart
                 options={areaChartData.options}
                 series={areaChartData.series}
                 type="area"
-                width="500"
+                height="280"
               />
             </div>
           )}

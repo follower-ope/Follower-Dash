@@ -39,7 +39,7 @@ function ProfileProjectChart({ profiles }) {
             formatter: seriesValue => msToTime(seriesValue),
           },
         },
-        colors: ['rgba(42, 158, 251, .7)', 'rgba(173, 19, 19, .7)'],
+        colors: ['rgba(0, 227, 150, 0.85)', 'rgba(173, 19, 19, .85)'],
         responsive: [
           {
             breakpoint: 480,

@@ -7,7 +7,7 @@ import ProjectProductivityByDay from '../../components/ProjectProductivityByDay'
 import ProfileProjectChart from '../../components/ProfileProjectChart';
 import { GetUsers, ChangeUserProject } from '../../services/UserService';
 import { GetProjectDetails } from '../../services/ProjectService';
-import { Container, Content, ButtonsContent } from './style';
+import { Container, Content } from './style';
 import { Table, ChartContent, Button } from '../../styles/components';
 import { errorMessage } from '../../services/Messages';
 
@@ -16,7 +16,6 @@ function ProjectDetails({ match }) {
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [project, setProject] = useState({});
   const [users, setUsers] = useState([]);
-  const [listUsers, setListUsers] = useState(true);
   const [userToAdd, setUserToAdd] = useState('');
 
   useEffect(() => {
@@ -24,6 +23,7 @@ function ProjectDetails({ match }) {
       const user = await GetUsers();
 
       if (project.users) {
+        console.log(project);
         setUsers(
           user.filter(value => {
             const userInProject = project.users.find(element => {
@@ -78,8 +78,7 @@ function ProjectDetails({ match }) {
     <>
       <h1>{project.title}</h1>
       <p>{project.description}</p>
-
-      <ButtonsContent>
+      {/* <ButtonsContent>
         <button
           type="button"
           className={listUsers && 'selected'}
@@ -94,75 +93,93 @@ function ProjectDetails({ match }) {
         >
           Produtividade
         </button>
-      </ButtonsContent>
+      </ButtonsContent> */}
 
-      <Content>
-        {listUsers &&
-          (loadingUsers ? (
+      <Container>
+        <ChartContent>
+          {loadingProject ? (
             <Loading />
           ) : (
-            <>
-              <div>
-                <h5>Incluir usuario no projeto</h5>
-                <Select
-                  options={users.map(u => {
-                    return { label: u.username, value: u.username };
-                  })}
-                  value={userToAdd}
-                  onChange={values => setUserToAdd(values[0].value)}
-                  placeholder="Selecione..."
-                />
-              </div>
-              <Button type="button" onClick={() => handleAddUser()}>
-                Adicionar
-              </Button>
-              <Table>
-                <thead>
-                  <th>Username</th>
-                  <th />
-                </thead>
-                <tbody>
-                  {project.users &&
-                    project.users.map(user => (
-                      <tr key={user.username}>
-                        <td>{user.username}</td>
-                        <td>
-                          <Button
-                            type="button"
-                            onClick={() => handleRemoveUser(user.username)}
-                          >
-                            Remover
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </Table>
-            </>
-          ))}
+            project.profiles && (
+              <ProfileProjectChart profiles={project.profiles} />
+            )
+          )}
+        </ChartContent>
+        <ChartContent>
+          {loadingProject ? (
+            <Loading />
+          ) : (
+            project.productivity && (
+              <ProjectProductivity productivity={project.productivity} />
+            )
+          )}
+        </ChartContent>
+      </Container>
 
-        {!listUsers && (
-          <Container>
-            <ChartContent>
-              {loadingProject ? (
-                <Loading />
-              ) : (
-                project.profiles && (
-                  <ProfileProjectChart profiles={project.profiles} />
-                )
-              )}
-            </ChartContent>
-            <ChartContent>
-              {project.productivity && (
-                <ProjectProductivity productivity={project.productivity} />
-              )}
-            </ChartContent>
-            <ChartContent>
-              {project.id && (
-                <ProjectProductivityByDay projectId={project.id} />
-              )}
-            </ChartContent>
-          </Container>
+      <Container>
+        <ChartContent className="full">
+          {project.id && <ProjectProductivityByDay projectId={project.id} />}
+        </ChartContent>
+      </Container>
+
+      <Content className="marginTop">
+        {loadingUsers ? (
+          <Loading />
+        ) : (
+          <>
+            <div>
+              <h5>Incluir usuario no projeto</h5>
+              <Select
+                options={users.map(u => {
+                  return { label: u.username, value: u.username };
+                })}
+                value={userToAdd}
+                onChange={values => setUserToAdd(values[0].value)}
+                placeholder="Selecione..."
+              />
+            </div>
+            <Button type="button" onClick={() => handleAddUser()}>
+              Adicionar
+            </Button>
+            <Table>
+              <thead>
+                <th>Username</th>
+                <th>Nome</th>
+                <th>Perfil</th>
+                <th />
+              </thead>
+              <tbody>
+                {project.users &&
+                  project.users.map(user => (
+                    <tr key={user.username}>
+                      <td>{user.username}</td>
+                      <td>
+                        {user.name ? (
+                          user.name
+                        ) : (
+                          <span className="faded">Não informado</span>
+                        )}
+                      </td>
+                      <td>
+                        {user.Profile ? (
+                          user.Profile.description
+                        ) : (
+                          <span className="faded">Não informado</span>
+                        )}
+                      </td>
+                      <td>
+                        <Button
+                          type="button"
+                          onClick={() => handleRemoveUser(user.username)}
+                        >
+                          Remover
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </Table>
+          </>
         )}
       </Content>
     </>

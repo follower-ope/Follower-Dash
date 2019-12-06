@@ -4,6 +4,10 @@ export const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
 
+  &.marginTop {
+    margin-top: 15px;
+  }
+
   li {
     button {
       padding: 3px 7px;
